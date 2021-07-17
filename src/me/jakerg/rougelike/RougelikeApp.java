@@ -14,10 +14,10 @@ import org.apache.commons.io.FileUtils;
 import asciiPanel.AsciiFont;
 import asciiPanel.AsciiPanel;
 import edu.southwestern.tasks.gvgai.zelda.dungeon.Dungeon;
-import edu.southwestern.tasks.gvgai.zelda.study.HumanSubjectStudy2019Zelda;
+//import edu.southwestern.tasks.gvgai.zelda.study.HumanSubjectStudy2019Zelda;
 import me.jakerg.csv.ParticipantData;
-import me.jakerg.csv.SimpleCSV;
-import me.jakerg.rougelike.screens.*;
+import me.jakerg.rougelike.screens.Screen;
+import me.jakerg.rougelike.screens.StartScreen;
 
 
 /**
@@ -155,13 +155,13 @@ public class RougelikeApp extends JFrame implements KeyListener{
 
 	}
 	
-	public static void saveParticipantData() throws Exception {
-		String fileTitle = HumanSubjectStudy2019Zelda.dungeonType;
-		String subjectDir = HumanSubjectStudy2019Zelda.subjectDir;
-		SimpleCSV<ParticipantData> data = new SimpleCSV<>(RougelikeApp.PD);
-		data.saveToCSV(true, new File("ZeldaStudy2019/" + fileTitle + ".csv"));
-		data.saveToTxt(new File(subjectDir + fileTitle + "_" + RougelikeApp.TRIES + ".txt"));
-	}
+//	public static void saveParticipantData() throws Exception {
+//		String fileTitle = HumanSubjectStudy2019Zelda.dungeonType;
+//		String subjectDir = HumanSubjectStudy2019Zelda.subjectDir;
+//		SimpleCSV<ParticipantData> data = new SimpleCSV<>(RougelikeApp.PD);
+//		data.saveToCSV(true, new File("ZeldaStudy2019/" + fileTitle + ".csv"));
+//		data.saveToTxt(new File(subjectDir + fileTitle + "_" + RougelikeApp.TRIES + ".txt"));
+//	}
 
 
 }

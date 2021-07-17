@@ -21,13 +21,13 @@ public class LoseScreen implements Screen {
 
 	public LoseScreen() {
 		RougelikeApp.LIVES--;
-		if(Parameters.parameters.booleanParameter("zeldaStudySavesParticipantData")) {
-			try {
-				RougelikeApp.saveParticipantData();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		}
+//		if(Parameters.parameters.booleanParameter("zeldaStudySavesParticipantData")) {
+//			try {
+//				RougelikeApp.saveParticipantData();
+//			} catch (Exception e1) {
+//				e1.printStackTrace();
+//			}
+//		}
 		RougelikeApp.TRIES++;
 		d = Dungeon.loadFromJson("data/rouge/tmp/dungeon.json");
 		try {

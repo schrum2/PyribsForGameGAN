@@ -34,7 +34,7 @@ import edu.southwestern.tasks.Task;
 import edu.southwestern.tasks.functionoptimization.FunctionOptimizationTask;
 import edu.southwestern.tasks.gvgai.zelda.ZeldaGANLevelTask;
 import edu.southwestern.tasks.gvgai.zelda.ZeldaLevelTask;
-import edu.southwestern.tasks.gvgai.zelda.study.HumanSubjectStudy2019Zelda;
+//import edu.southwestern.tasks.gvgai.zelda.study.HumanSubjectStudy2019Zelda;
 import edu.southwestern.tasks.interactive.InteractiveEvolutionTask;
 import edu.southwestern.tasks.interactive.InteractiveGANLevelEvolutionTask;
 import edu.southwestern.tasks.interactive.gvgai.ZeldaCPPNtoGANLevelBreederTask;
@@ -942,25 +942,25 @@ public class MMNEAT {
 //				System.out.println("This trial terminated unexpectedly. Please inform the researcher immediately.");
 //				System.exit(1);
 //			}
-		} else if(args[0].startsWith("zeldaType:")){
-			
-			Parameters.initializeParameterCollections(args);
-			String type = Parameters.parameters.stringParameter("zeldaType");
-			HumanSubjectStudy2019Zelda.Type t = null;
-			switch(type) {
-			case "original":
-				t = HumanSubjectStudy2019Zelda.Type.ORIGINAL;
-				break;
-			case "generated":
-				t = HumanSubjectStudy2019Zelda.Type.GENERATED_DUNGEON;
-				break;
-			case "tutorial":
-				t = HumanSubjectStudy2019Zelda.Type.TUTORIAL;
-				break;
-			default:
-				throw new IllegalArgumentException("zeldaType : " + type + " unrecognized. (original, generated, tutorial)");
-			}
-			HumanSubjectStudy2019Zelda.runTrial(t);
+//		} else if(args[0].startsWith("zeldaType:")){
+//			
+//			Parameters.initializeParameterCollections(args);
+//			String type = Parameters.parameters.stringParameter("zeldaType");
+//			HumanSubjectStudy2019Zelda.Type t = null;
+//			switch(type) {
+//			case "original":
+//				t = HumanSubjectStudy2019Zelda.Type.ORIGINAL;
+//				break;
+//			case "generated":
+//				t = HumanSubjectStudy2019Zelda.Type.GENERATED_DUNGEON;
+//				break;
+//			case "tutorial":
+//				t = HumanSubjectStudy2019Zelda.Type.TUTORIAL;
+//				break;
+//			default:
+//				throw new IllegalArgumentException("zeldaType : " + type + " unrecognized. (original, generated, tutorial)");
+//			}
+//			HumanSubjectStudy2019Zelda.runTrial(t);
 		} else {
 			evolutionaryRun(args);
 		}

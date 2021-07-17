@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.nd4j.linalg.api.ndarray.INDArray;
+//import org.nd4j.linalg.api.ndarray.INDArray;
 
-import edu.southwestern.util.sound.SoundToArray;
+//import edu.southwestern.util.sound.SoundToArray;
 
 /**
  * Various useful methods with arrays
@@ -247,13 +247,13 @@ public class ArrayUtil {
 	 * @param row INDArray with just one row
 	 * @return corresponding double array
 	 */
-	public static double[] doubleArrayFromINDArray(INDArray row) {
-		double[] array = new double[(int) row.length()];
-		for(int i = 0; i < array.length; i++) {
-			array[i] = row.getDouble(i);
-		}
-		return array;
-	}
+//	public static double[] doubleArrayFromINDArray(INDArray row) {
+//		double[] array = new double[(int) row.length()];
+//		for(int i = 0; i < array.length; i++) {
+//			array[i] = row.getDouble(i);
+//		}
+//		return array;
+//	}
 	
 	/**
 	 * Return true if any element of members is also an element of set
@@ -723,14 +723,14 @@ public class ArrayUtil {
 	 * @param fileB Second audio file being overlapped
 	 * @return array of doubles with values that are the sum of the two input audio files at each index
 	 */
-	public static double[] overlap(String fileA, String fileB) {
-		double[] a = SoundToArray.read(fileA); //reads string files in as double arrays
-		double[] b = SoundToArray.read(fileB);
-		double[] adjustedA = Arrays.copyOf(a, Math.min(a.length, b.length)); //copy of itself but adjusted based on length of shortest array
-		double[] adjustedB = Arrays.copyOf(b, Math.min(a.length, b.length)); //copy of itself but adjusted based on length of shortest array
-		double[] overlapped = ArrayUtil.zipAdd(adjustedA, adjustedB); //zipAdd() is a method in ArrayUtil that adds values at each index of two arrays into a new array
-		return overlapped;
-	}
+//	public static double[] overlap(String fileA, String fileB) {
+//		double[] a = SoundToArray.read(fileA); //reads string files in as double arrays
+//		double[] b = SoundToArray.read(fileB);
+//		double[] adjustedA = Arrays.copyOf(a, Math.min(a.length, b.length)); //copy of itself but adjusted based on length of shortest array
+//		double[] adjustedB = Arrays.copyOf(b, Math.min(a.length, b.length)); //copy of itself but adjusted based on length of shortest array
+//		double[] overlapped = ArrayUtil.zipAdd(adjustedA, adjustedB); //zipAdd() is a method in ArrayUtil that adds values at each index of two arrays into a new array
+//		return overlapped;
+//	}
 
 
 	/**
@@ -962,13 +962,13 @@ public class ArrayUtil {
 	 * @param values An INDArray that must be 1D
 	 * @return ArrayList with same values in same order
 	 */
-	public static ArrayList<Double> doubleVectorFromINDArray(INDArray values) {
-		ArrayList<Double> result = new ArrayList<Double>((int) values.length());
-		for (int i = 0; i < values.length(); i++) {
-			result.add(values.getDouble(0,i));
-		}
-		return result;
-	}
+//	public static ArrayList<Double> doubleVectorFromINDArray(INDArray values) {
+//		ArrayList<Double> result = new ArrayList<Double>((int) values.length());
+//		for (int i = 0; i < values.length(); i++) {
+//			result.add(values.getDouble(0,i));
+//		}
+//		return result;
+//	}
 	
 	/**
 	 * For each pair of elements in the two separate 1D INDArrays
@@ -977,13 +977,13 @@ public class ArrayUtil {
 	 * @param toModify Array that is modified to contain minimum values
 	 * @param other Other array checked for smaller values
 	 */
-	public static void pairwiseMinimum(INDArray toModify, INDArray other) {
-		assert toModify.length() == other.length() : "INDArrays not the same size";
-		int size = (int) toModify.length();
-		for(int i = 0; i < size; i++) {
-			toModify.put(0, i, Math.min(toModify.getDouble(0,i), other.getDouble(0,i)));
-		}		
-	}
+//	public static void pairwiseMinimum(INDArray toModify, INDArray other) {
+//		assert toModify.length() == other.length() : "INDArrays not the same size";
+//		int size = (int) toModify.length();
+//		for(int i = 0; i < size; i++) {
+//			toModify.put(0, i, Math.min(toModify.getDouble(0,i), other.getDouble(0,i)));
+//		}		
+//	}
 	
 	/**
 	 * Return a rotated version of a List of Lists representing a 2D grid.

@@ -40,7 +40,7 @@ import edu.southwestern.evolution.GenerationalEA;
 import edu.southwestern.evolution.SinglePopulationGenerationalEA;
 import edu.southwestern.evolution.genotypes.Genotype;
 import edu.southwestern.evolution.genotypes.TWEANNGenotype;
-import edu.southwestern.evolution.lineage.Offspring;
+//import edu.southwestern.evolution.lineage.Offspring;
 import edu.southwestern.evolution.mutation.tweann.ActivationFunctionRandomReplacement;
 import edu.southwestern.evolution.selectiveBreeding.SelectiveBreedingEA;
 import edu.southwestern.networks.ActivationFunctions;
@@ -946,52 +946,52 @@ public abstract class InteractiveEvolutionTask<T> implements SinglePopulationTas
 	 * TODO: Currently not used because it doesn't fully work properly.
 	 */
 	@SuppressWarnings({ "rawtypes", "unused" })
-	private void setLineage() {
-		if(!showLineage) {
-			showLineage = true;
-			resetLineageDrawer();
-			String base = Parameters.parameters.stringParameter("base");
-			String log =  Parameters.parameters.stringParameter("log");
-			int runNumber = Parameters.parameters.integerParameter("runNumber");
-			String saveTo = Parameters.parameters.stringParameter("saveTo");
-			String prefix = base + "/" + saveTo + runNumber + "/" + log + runNumber + "_";
-			String originalPrefix = base + "/" + saveTo + runNumber + "/" + log + runNumber + "_";
-
-			drawnOffspring = new HashSet<Long>();
-			savedLineage = new HashMap<Integer, Integer>();
-			dPanels = new ArrayList<DrawingPanel>();
-
-			try {
-				Offspring.reset();
-				Offspring.lineage = new ArrayList<Offspring>();
-				PopulationUtil.loadLineage();
-				System.out.println("Lineage loaded from file");
-				// Also adds networks
-				Offspring.addAllScores(prefix, "parents_gen", ((SinglePopulationGenerationalEA) MMNEAT.ea).currentGeneration(), true, originalPrefix);
-				System.out.println("Scores added");
-				for(int i = 0; i < chosen.length; i++) {
-					boolean choose = chosen[i];
-					if(choose) {//loops through and any image  clicked automatically saved
-						Score<T> s = scores.get(i);
-						Genotype<T> network = s.individual;
-						long id = network.getId();
-						for(Offspring o : SelectiveBreedingEA.offspring) {
-							if(o.offspringId == id) {
-								// Magic number here: 600 is start y-coord for drawing lineage
-								drawLineage(o, id, 0, 600);						
-							}
-						}
-					}
-				}
-			} catch (FileNotFoundException e) {
-				System.out.println("Lineage browser failed");
-				e.printStackTrace();
-			}
-		} else {
-			resetLineageDrawer();
-			showLineage = false;
-		}
-	}
+//	private void setLineage() {
+//		if(!showLineage) {
+//			showLineage = true;
+//			resetLineageDrawer();
+//			String base = Parameters.parameters.stringParameter("base");
+//			String log =  Parameters.parameters.stringParameter("log");
+//			int runNumber = Parameters.parameters.integerParameter("runNumber");
+//			String saveTo = Parameters.parameters.stringParameter("saveTo");
+//			String prefix = base + "/" + saveTo + runNumber + "/" + log + runNumber + "_";
+//			String originalPrefix = base + "/" + saveTo + runNumber + "/" + log + runNumber + "_";
+//
+//			drawnOffspring = new HashSet<Long>();
+//			savedLineage = new HashMap<Integer, Integer>();
+//			dPanels = new ArrayList<DrawingPanel>();
+//
+//			try {
+//				Offspring.reset();
+//				Offspring.lineage = new ArrayList<Offspring>();
+//				PopulationUtil.loadLineage();
+//				System.out.println("Lineage loaded from file");
+//				// Also adds networks
+//				Offspring.addAllScores(prefix, "parents_gen", ((SinglePopulationGenerationalEA) MMNEAT.ea).currentGeneration(), true, originalPrefix);
+//				System.out.println("Scores added");
+//				for(int i = 0; i < chosen.length; i++) {
+//					boolean choose = chosen[i];
+//					if(choose) {//loops through and any image  clicked automatically saved
+//						Score<T> s = scores.get(i);
+//						Genotype<T> network = s.individual;
+//						long id = network.getId();
+//						for(Offspring o : SelectiveBreedingEA.offspring) {
+//							if(o.offspringId == id) {
+//								// Magic number here: 600 is start y-coord for drawing lineage
+//								drawLineage(o, id, 0, 600);						
+//							}
+//						}
+//					}
+//				}
+//			} catch (FileNotFoundException e) {
+//				System.out.println("Lineage browser failed");
+//				e.printStackTrace();
+//			}
+//		} else {
+//			resetLineageDrawer();
+//			showLineage = false;
+//		}
+//	}
 
 	/**
 	 * Draws lineage of image recursively
@@ -1000,15 +1000,15 @@ public abstract class InteractiveEvolutionTask<T> implements SinglePopulationTas
 	 * @param x x-coord of image
 	 * @param y y-coord of image
 	 */
-	private void drawLineage(Offspring o, long id, int x, int y) { 
-		int depth = 0;
-		if(o.parentId1 > -1) {
-			drawLineage(o.parentId1, id, x, y - buttonHeight/4, depth++);
-		}
-		if(o.parentId2 > -1) {
-			drawLineage(o.parentId2, id, x, y + buttonHeight/4, depth++);
-		}	
-	}
+//	private void drawLineage(Offspring o, long id, int x, int y) { 
+//		int depth = 0;
+//		if(o.parentId1 > -1) {
+//			drawLineage(o.parentId1, id, x, y - buttonHeight/4, depth++);
+//		}
+//		if(o.parentId2 > -1) {
+//			drawLineage(o.parentId2, id, x, y + buttonHeight/4, depth++);
+//		}	
+//	}
 
 	/**
 	 * draws lineage of an image
@@ -1020,22 +1020,22 @@ public abstract class InteractiveEvolutionTask<T> implements SinglePopulationTas
 	 * @param depth depth of the recursive call and this the
 	 *              distance in generations from the child.
 	 */
-	@SuppressWarnings("unchecked")
-	public void drawLineage(long id, long childId, int x, int y, int depth) {
-		Offspring o = Offspring.lineage.get((int) id);
-		if(o != null && !drawnOffspring.contains(id)) { // Don't draw if already drawn
-			Genotype<T> g = (Genotype<T>) Offspring.getGenotype(o.xmlNetwork);
-			BufferedImage bi = getButtonImage(g.getPhenotype(), buttonWidth/2, buttonHeight/2, inputMultipliers);
-			DrawingPanel p = GraphicsUtil.drawImage(bi, id + " -> " + childId, buttonWidth/2, buttonHeight/2);
-			p.setLocation(x, y);
-			savedLineage.put(depth, savedLineage.get(depth) == null ? 0 : savedLineage.get(depth) + 1);
-			drawLineage(o, id, x + buttonHeight/2, y);
-			p.setTitle(id + "ancestor" + depth + savedLineage.get(depth));
-			p.save(p.getFrame().getTitle());
-			dPanels.add(p);
-		}
-		drawnOffspring.add(id); // don't draw again
-	}
+//	@SuppressWarnings("unchecked")
+//	public void drawLineage(long id, long childId, int x, int y, int depth) {
+//		Offspring o = Offspring.lineage.get((int) id);
+//		if(o != null && !drawnOffspring.contains(id)) { // Don't draw if already drawn
+//			Genotype<T> g = (Genotype<T>) Offspring.getGenotype(o.xmlNetwork);
+//			BufferedImage bi = getButtonImage(g.getPhenotype(), buttonWidth/2, buttonHeight/2, inputMultipliers);
+//			DrawingPanel p = GraphicsUtil.drawImage(bi, id + " -> " + childId, buttonWidth/2, buttonHeight/2);
+//			p.setLocation(x, y);
+//			savedLineage.put(depth, savedLineage.get(depth) == null ? 0 : savedLineage.get(depth) + 1);
+//			drawLineage(o, id, x + buttonHeight/2, y);
+//			p.setTitle(id + "ancestor" + depth + savedLineage.get(depth));
+//			p.save(p.getFrame().getTitle());
+//			dPanels.add(p);
+//		}
+//		drawnOffspring.add(id); // don't draw again
+//	}
 
 	/**
 	 * undoes previous evolution call

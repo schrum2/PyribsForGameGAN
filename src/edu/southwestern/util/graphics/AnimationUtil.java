@@ -10,7 +10,7 @@ import javax.imageio.stream.ImageOutputStream;
 
 import edu.southwestern.networks.Network;
 import edu.southwestern.parameters.Parameters;
-import edu.southwestern.tasks.interactive.objectbreeder.ThreeDimensionalObjectBreederTask;
+//import edu.southwestern.tasks.interactive.objectbreeder.ThreeDimensionalObjectBreederTask;
 
 /**
  * Series of utility methods used to create and manipulate
@@ -113,13 +113,13 @@ public class AnimationUtil {
 	 * @param inputMultiples array with inputs determining whether CPPN inputs are turned on or off
 	 * @return
 	 */
-	public static BufferedImage[] shapesFromCPPN(Network n, int imageWidth, int imageHeight, int startTime, int endTime, Color color, double heading, double pitch, double[] inputMultiples) {
-		BufferedImage[] images = new BufferedImage[endTime-startTime];
-		for(int i = startTime; i < endTime; i++) {
-			images[i-startTime] = ThreeDimensionalUtil.currentImageFromCPPN(n, imageWidth, imageHeight, ThreeDimensionalObjectBreederTask.CUBE_SIDE_LENGTH, ThreeDimensionalObjectBreederTask.SHAPE_HEIGHT,ThreeDimensionalObjectBreederTask.SHAPE_WIDTH, ThreeDimensionalObjectBreederTask.SHAPE_DEPTH, color, heading, pitch, inputMultiples, i/FRAMES_PER_SEC);
-		}
-		return images;
-	}		
+//	public static BufferedImage[] shapesFromCPPN(Network n, int imageWidth, int imageHeight, int startTime, int endTime, Color color, double heading, double pitch, double[] inputMultiples) {
+//		BufferedImage[] images = new BufferedImage[endTime-startTime];
+//		for(int i = startTime; i < endTime; i++) {
+//			images[i-startTime] = ThreeDimensionalUtil.currentImageFromCPPN(n, imageWidth, imageHeight, ThreeDimensionalObjectBreederTask.CUBE_SIDE_LENGTH, ThreeDimensionalObjectBreederTask.SHAPE_HEIGHT,ThreeDimensionalObjectBreederTask.SHAPE_WIDTH, ThreeDimensionalObjectBreederTask.SHAPE_DEPTH, color, heading, pitch, inputMultiples, i/FRAMES_PER_SEC);
+//		}
+//		return images;
+//	}		
 	
 	/**
 	 * Method used to save an array of buffered images to a file. Uses external class GifSequenceWriter

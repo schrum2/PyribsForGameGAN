@@ -12,16 +12,12 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import org.nd4j.linalg.api.ndarray.INDArray;
-
 import edu.southwestern.networks.Network;
 import edu.southwestern.networks.activationfunctions.FullLinearPiecewiseFunction;
 import edu.southwestern.networks.activationfunctions.HalfLinearPiecewiseFunction;
 import edu.southwestern.parameters.Parameters;
-import edu.southwestern.tasks.interactive.picbreeder.PicbreederTask;
 import edu.southwestern.util.CartesianGeometricUtilities;
 import edu.southwestern.util.datastructures.ArrayUtil;
-import edu.southwestern.util.sound.SoundToArray;
 import edu.southwestern.util.util2D.ILocated2D;
 import edu.southwestern.util.util2D.Tuple2D;
 
@@ -76,10 +72,10 @@ public class GraphicsUtil {
 	 * @param imageHeight height of image
 	 * @return buffered image containing image drawn by network
 	 */
-	public static BufferedImage imageFromCPPN(Network n, int imageWidth, int imageHeight) {
-		//-1 indicates that we don't care about time
-		return imageFromCPPN(n,imageWidth,imageHeight, ArrayUtil.doubleOnes(PicbreederTask.CPPN_NUM_INPUTS), -1);
-	}
+//	public static BufferedImage imageFromCPPN(Network n, int imageWidth, int imageHeight) {
+//		//-1 indicates that we don't care about time
+//		return imageFromCPPN(n,imageWidth,imageHeight, ArrayUtil.doubleOnes(PicbreederTask.CPPN_NUM_INPUTS), -1);
+//	}
 
 	/**
 	 * Default version of Buffered Image creation used for Picbreeder. Takes input multipliers into account,
@@ -626,34 +622,34 @@ public class GraphicsUtil {
 	 * @param array INDArray containing an image
 	 * @return BufferedImage 
 	 */
-	public static BufferedImage imageFromINDArray(INDArray array) {
-		long[] shape = array.shape();
-		// Should the order of these be switched?
-		int width = (int) shape[2];
-		int height = (int) shape[3];
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		// Copy from INDArray to BufferedImage
-		for (int x = 0; x < width; x++) {// scans across whole image
-			for (int y = 0; y < height; y++) {
-				int red = array.getInt(0,2,y,x);
-				int green = array.getInt(0,1,y,x);
-				int blue = array.getInt(0,0,y,x);
-				
-				// There is a risk of colors going out of acceptable bounds when doing the neural style transfer.
-				// The clipping here prevents that.
-				red = Math.min(red, 255);
-				green = Math.min(green, 255);
-				blue = Math.min(blue, 255);
-
-				red = Math.max(red, 0);
-				green = Math.max(green, 0);
-				blue = Math.max(blue, 0);
-				
-				image.setRGB(x, y, new Color(red,green,blue).getRGB());
-			}
-		}
-		return image;
-	}
+//	public static BufferedImage imageFromINDArray(INDArray array) {
+//		long[] shape = array.shape();
+//		// Should the order of these be switched?
+//		int width = (int) shape[2];
+//		int height = (int) shape[3];
+//		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+//		// Copy from INDArray to BufferedImage
+//		for (int x = 0; x < width; x++) {// scans across whole image
+//			for (int y = 0; y < height; y++) {
+//				int red = array.getInt(0,2,y,x);
+//				int green = array.getInt(0,1,y,x);
+//				int blue = array.getInt(0,0,y,x);
+//				
+//				// There is a risk of colors going out of acceptable bounds when doing the neural style transfer.
+//				// The clipping here prevents that.
+//				red = Math.min(red, 255);
+//				green = Math.min(green, 255);
+//				blue = Math.min(blue, 255);
+//
+//				red = Math.max(red, 0);
+//				green = Math.max(green, 0);
+//				blue = Math.max(blue, 0);
+//				
+//				image.setRGB(x, y, new Color(red,green,blue).getRGB());
+//			}
+//		}
+//		return image;
+//	}
 
 	/**
 	 * Plots line of a designated color drawn by an input array list of doubles on a drawing panel.
@@ -735,10 +731,10 @@ public class GraphicsUtil {
 	 * 
 	 * @param fileName String reference to file being plotted
 	 */
-	public static void wavePlotFromFile(String fileName, int height, int width) {
-		double[] fileArray = SoundToArray.read(fileName); //create array of doubles representing audio
-		wavePlotFromDoubleArray(fileArray, height, width);
-	}
+//	public static void wavePlotFromFile(String fileName, int height, int width) {
+//		double[] fileArray = SoundToArray.read(fileName); //create array of doubles representing audio
+//		wavePlotFromDoubleArray(fileArray, height, width);
+//	}
 
 	/**
 	 * Creates a graphed visualization of an audio file by taking in the list of doubles that represents the file and 

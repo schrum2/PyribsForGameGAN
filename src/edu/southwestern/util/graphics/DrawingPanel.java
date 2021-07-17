@@ -21,7 +21,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import edu.southwestern.MMNEAT.MMNEAT;
-import edu.southwestern.tasks.interactive.picbreeder.PicbreederTask;
+//import edu.southwestern.tasks.interactive.picbreeder.PicbreederTask;
 
 public class DrawingPanel implements ActionListener {
 
@@ -87,11 +87,11 @@ public class DrawingPanel implements ActionListener {
 				if (DUMP_IMAGE) {
 					DrawingPanel.this.save(TARGET_IMAGE_FILE_NAME);
 				}
-					if(MMNEAT.task instanceof PicbreederTask) {
-						dispose();
-					} else { 
+//					if(MMNEAT.task instanceof PicbreederTask) {
+//						dispose();
+//					} else { 
 						System.exit(0);
-					}
+//					}
 
 				}
 		});

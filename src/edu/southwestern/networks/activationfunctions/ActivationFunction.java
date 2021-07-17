@@ -1,6 +1,6 @@
 package edu.southwestern.networks.activationfunctions;
 
-import org.nd4j.linalg.activations.Activation;
+//import org.nd4j.linalg.activations.Activation;
 
 public interface ActivationFunction {
 	/**
@@ -15,7 +15,7 @@ public interface ActivationFunction {
 	 * return the enum entry identifying it.
 	 * @return Instance of Activation enum from DL4J
 	 */
-	public Activation equivalentDL4JFunction();
+//	public Activation equivalentDL4JFunction();
 	
 	/**
 	 * Display name for this function

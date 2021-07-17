@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="libs/guava-19.0.jar"/>
 	<classpathentry kind="lib" path="libs/commons-io-2.5.jar"/>
 	<classpathentry kind="lib" path="libs/AsciiPanel-ac179b1.jar"/>
+	<classpathentry kind="lib" path="libs/vecmath-1.5.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

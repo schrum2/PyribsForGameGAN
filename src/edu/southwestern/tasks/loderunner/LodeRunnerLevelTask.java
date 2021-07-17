@@ -15,7 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import edu.southwestern.MMNEAT.MMNEAT;
 import edu.southwestern.evolution.genotypes.Genotype;
@@ -36,7 +35,7 @@ import edu.southwestern.util.datastructures.Pair;
 import edu.southwestern.util.datastructures.Triple;
 import edu.southwestern.util.file.FileUtilities;
 import edu.southwestern.util.graphics.GraphicsUtil;
-import icecreamyou.LodeRunner.LodeRunner;
+//import icecreamyou.LodeRunner.LodeRunner;
 
 /**
  * 
@@ -313,19 +312,19 @@ public abstract class LodeRunnerLevelTask<T> extends NoisyLonerTask<T> implement
 				//e.printStackTrace();
 			}
 			//Gives you the option to play the level by pressing p, or skipping by pressing enter, after the visualization is displayed 
-			System.out.println("Enter 'P' to play, or just press Enter to continue");
-			String input = MiscUtil.waitForReadStringAndEnterKeyPress();
-			System.out.println("Entered \""+input+"\"");
-			//if the user entered P or p, then run
-			if(input.toLowerCase().equals("p")) {
-				SwingUtilities.invokeLater(new Runnable() {
-					public void run() {
-						new LodeRunner(level);
-					}
-				});
-				System.out.println("Press enter");
-				MiscUtil.waitForReadStringAndEnterKeyPress();
-			}
+			System.out.println("Press Enter to continue");
+			MiscUtil.waitForReadStringAndEnterKeyPress();
+//			System.out.println("Entered \""+input+"\"");
+//			//if the user entered P or p, then run
+//			if(input.toLowerCase().equals("p")) {
+//				SwingUtilities.invokeLater(new Runnable() {
+//					public void run() {
+//						new LodeRunner(level);
+//					}
+//				});
+//				System.out.println("Press enter");
+//				MiscUtil.waitForReadStringAndEnterKeyPress();
+//			}
 		}
 
 		// LodeRunnerLevelSequenceTask has it's own MAP Elites binning rules defined in LodeRunnerLevelSequenceTask

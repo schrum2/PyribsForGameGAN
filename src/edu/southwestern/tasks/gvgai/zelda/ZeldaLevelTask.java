@@ -44,7 +44,7 @@ public abstract class ZeldaLevelTask<T> extends NoisyLonerTask<T> {
 	
 	public abstract List<List<Integer>> getZeldaLevelFromGenotype(Genotype<T> individual);
 	
-	public abstract GameBundle getBundleFromGenotype(Genotype<T> individual);
+//	public abstract GameBundle getBundleFromGenotype(Genotype<T> individual);
 	
 	@Override
 	public Pair<double[], double[]> oneEval(Genotype<T> individual, int num) {
@@ -55,10 +55,10 @@ public abstract class ZeldaLevelTask<T> extends NoisyLonerTask<T> {
 		double maxDistanceW = ZeldaLevelUtil.findMaxDistanceOfLevel(level, 2, 6);
 		double maxDistanceE = ZeldaLevelUtil.findMaxDistanceOfLevel(level, 13, 6);
 		
-		if(CommonConstants.watch) {
-			GameBundle bundle = getBundleFromGenotype(individual);
-			GVGAIUtil.runOneGame(bundle, true);
-		}
+//		if(CommonConstants.watch) {
+//			GameBundle bundle = getBundleFromGenotype(individual);
+//			GVGAIUtil.runOneGame(bundle, true);
+//		}
 		
 		return new Pair<double[], double[]>(new double[]{maxDistanceS, maxDistanceN, maxDistanceE, maxDistanceW}, new double[0]);
 	}

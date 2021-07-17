@@ -288,7 +288,7 @@ public class ArcadeMachine {
 
 			// Assign the actions to the player. playerID used is 0, default
 			// for single player games
-			((gvgai.tracks.singlePlayer.tools.replayer.Agent) players[0]).setActions(actions);
+			//((gvgai.tracks.singlePlayer.tools.replayer.Agent) players[0]).setActions(actions);
 
 			} else {
 			// Multi player file

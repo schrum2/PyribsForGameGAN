@@ -26,7 +26,7 @@ import gvgai.core.vgdl.VGDLRegistry;
 import gvgai.core.vgdl.VGDLViewer;
 import gvgai.tools.Vector2d;
 import gvgai.tracks.ArcadeMachine;
-import gvgai.tracks.singlePlayer.tools.human.Agent;
+//import gvgai.tracks.singlePlayer.tools.human.Agent;
 
 /**
  * 
@@ -152,10 +152,10 @@ public class GVGAIUtil {
 		Player[] players = new AbstractPlayer[] {agent};
 
 		// Then, play the game.
-		if (visuals)
-			// Agent is the generically named class for a human controlled agent
-			toPlay.playGame(players, randomSeed, agent instanceof Agent, playerID);
-		else
+//		if (visuals)
+//			// Agent is the generically named class for a human controlled agent
+//			toPlay.playGame(players, randomSeed, agent instanceof Agent, playerID);
+//		else
 			toPlay.runGame(players, randomSeed);
 
 		// This, the last thing to do in this method, always:
@@ -179,18 +179,18 @@ public class GVGAIUtil {
 	 * @param height Height of image in pixels
 	 * @return buffered image of level
 	 */
-	public static BufferedImage getLevelImage(BasicGame game, String[] level, Agent humanPlayer, int width, int height, int seed) {
-		int square_size = game.square_size;
-		game.square_size = Math.min(height / level.length, width / level[0].length());
-		game.buildStringLevel(level, seed); // Must change square size before building level to affect size
-		VGDLViewer view = new VGDLViewer(game, humanPlayer);
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		Graphics g = image.getGraphics(); // Changed to graphics will affect the image
-		view.paint(game.spriteGroups);
-		view.paintComponent(g); // Put the sprites into the graphics object
-		game.square_size = square_size; // restore before returning
-		return image;
-	}
+//	public static BufferedImage getLevelImage(BasicGame game, String[] level, Agent humanPlayer, int width, int height, int seed) {
+//		int square_size = game.square_size;
+//		game.square_size = Math.min(height / level.length, width / level[0].length());
+//		game.buildStringLevel(level, seed); // Must change square size before building level to affect size
+//		VGDLViewer view = new VGDLViewer(game, humanPlayer);
+//		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+//		Graphics g = image.getGraphics(); // Changed to graphics will affect the image
+//		view.paint(game.spriteGroups);
+//		view.paintComponent(g); // Put the sprites into the graphics object
+//		game.square_size = square_size; // restore before returning
+//		return image;
+//	}
 	
 	/**
 	 * Take a CPPN and some sprite information to create a level
@@ -307,202 +307,202 @@ public class GVGAIUtil {
 	 * For testing and troubleshooting
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		Parameters.initializeParameterCollections(new String[] {});
-		//MMNEAT.loadClasses();
-		
-		VGDLFactory.GetInstance().init();
-		VGDLRegistry.GetInstance().init();
-
-		String game = "blacksmoke"; // "zelda";
-		String gamesPath = "data/gvgai/examples/gridphysics/";
-		String game_file = gamesPath + game + ".txt";
-		int playerID = 0;
-		int seed = 0;	
-		
-		////////////////////////////////////////////////////////
-		// Allows for playing a bait level defined by a random CPPN
-		TWEANNGenotype cppn = new TWEANNGenotype(4, 9, 0);
-		TWEANN net = cppn.getPhenotype();
-		String[] level = generateLevelFromCPPN(net, new double[] {1,1,1,1}, 20, 20, '.', 'w', 
-				new char[]{'w','b','c'}, new char[]{'l','k','e','A'}, new char[]{'d'}, 15, new char[0]);
-
-		Agent agent = new Agent();
-		agent.setup(null, seed, true); // null = no log, true = human 
-
-		// Image preview
-		Game toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
-		BufferedImage levelImage = getLevelImage(((BasicGame) toPlay), level, agent, 200, 200, seed);
-		DrawingPanel panel = GraphicsUtil.drawImage(levelImage, "Level Preview", 200, 200); 
-		
-		// Reinitialize to clean up mess from image preview
-		toPlay = new VGDLParser().parseGame(game_file);
-		GameBundle bundle = new GameBundle(toPlay, level, agent, seed, playerID);
-		runOneGame(bundle, true);
-		//////////////////////////////////////////////////////	
-		
-		panel.dispose();
-		
-		//////////////////////////////////////////////////////
-
-		//Recreated the LevelBreederTask.Java in its simplest form to narrow down the errors that we receive
-		
-		//////////////////////////////////////////////////////
-		
-		VGDLFactory.GetInstance().init();
-		VGDLRegistry.GetInstance().init();
-
-		game = "zelda";
-		gamesPath = "data/gvgai/examples/gridphysics/";
-		game_file = gamesPath + game + ".txt";
-		
-		cppn = new TWEANNGenotype(4, 8 , 0);
-		net = cppn.getPhenotype();
-		level = generateLevelFromCPPN(net, new double[] {1,1,1,1}, 20, 20, '.', 'w', 
-				new char[]{'w'}, new char[]{'g','+','A'}, new char[]{'1','2','3'}, 15, new char[0]);
-
-		agent = new Agent();
-		agent.setup(null, seed, true); // null = no log, true = human 
-
-		// Image preview
-		toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
-		levelImage = getLevelImage(((BasicGame) toPlay), level, agent, 200, 200, seed);
-		panel = GraphicsUtil.drawImage(levelImage, "Level Preview", 200, 200); 
-		
-		// Reinitialize to clean up mess from image preview
-		toPlay = new VGDLParser().parseGame(game_file);
-		bundle = new GameBundle(toPlay, level, agent, seed, playerID);
-		runOneGame(bundle, true);
-		
-		//////////////////////////////////////////////////////
-		
-		panel.dispose();
-	}
-	
-	public static void troubleshooting1() {
-		Parameters.initializeParameterCollections(new String[] {});
-		//MMNEAT.loadClasses();
-		
-		VGDLFactory.GetInstance().init();
-		VGDLRegistry.GetInstance().init();
-
-		String game = "blacksmoke"; // "zelda";
-		String gamesPath = "data/gvgai/examples/gridphysics/";
-		String game_file = gamesPath + game + ".txt";
-		int playerID = 0;
-		int seed = 0;
-	
-		////////////////////////////////////////////////////////
-		// Allows for playing of any of the existing Zelda levels
-//		int levelNum = 2;
-//		String level_file = gamesPath + game + "_lvl" + levelNum + ".txt";
+//	public static void main(String[] args) {
+//		Parameters.initializeParameterCollections(new String[] {});
+//		//MMNEAT.loadClasses();
 //		
-//		Game toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
-//		String[] level = new IO().readFile(level_file);
+//		VGDLFactory.GetInstance().init();
+//		VGDLRegistry.GetInstance().init();
 //
-//		Agent agent = new Agent();
-//		agent.setup(null, seed, true); // null = no log, true = human 
-//
-//		runOneGame(toPlay, level, true, agent, seed, playerID);
-		//////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////
-		// Allows for playing a Zelda level defined as a String array
-//		Game toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
-//		String[] level = new String[] {
-//			"wwwwwwwwwwwwwwwwwwwww", 
-//			"w..3.ww............Aw", 
-//			"w....w......wwwwwwwww", 
-//			"w.w.....wwwwwwwwwwwww", 
-//			"w.w........1.......1w", 
-//			"w.wwwwwwwwwwwwwwwww.w", 
-//			"w.......w...wwwwwww.w", 
-//			"w...2w....wgww+....3w", 
-//			"wwwwwwwwwwwwwwwwwwwww"	
-//		};
-		
-//		String[] level = new String[] {
-//				"wwwwwwwwwwwwwwwwwwwwww", 
-//				"w...............3wwwww", 
-//				"wA.......g......3wwwww", 
-//				"w................1wwww", 
-//				"w................12www", 
-//				"w................33www", 
-//				"w................212ww", 
-//				"w...................ww", 
-//				"w...................ww", 
-//				"w...........+.......ww", 
-//				"w...................ww", 
-//				"w..................www", 
-//				"w..................www", 
-//				"w.................wwww", 
-//				"w................wwwww", 
-//				"w...............wwwwww", 
-//				"w..............wwwwwww", 
-//				"ww...........wwwwwwwww", 
-//				"wwww.......wwwwwwwwwww", 
-//				"wwwwwwwwwwwwwwwwwwwwww", 
-//				"wwwwwwwwwwwwwwwwwwwwww", 
-//				"wwwwwwwwwwwwwwwwwwwwww"	
-//			};
-//
-//		Agent agent = new Agent();
-//		agent.setup(null, seed, true); // null = no log, true = human 
-//
-//		runOneGame(toPlay, level, true, agent, seed, playerID);
-		//////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////
-		// Allows for playing a Zelda level defined by a random CPPN
-//		Game toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
-//		TWEANNGenotype cppn = new TWEANNGenotype(4, 5, 0);
+//		String game = "blacksmoke"; // "zelda";
+//		String gamesPath = "data/gvgai/examples/gridphysics/";
+//		String game_file = gamesPath + game + ".txt";
+//		int playerID = 0;
+//		int seed = 0;	
+//		
+//		////////////////////////////////////////////////////////
+//		// Allows for playing a bait level defined by a random CPPN
+//		TWEANNGenotype cppn = new TWEANNGenotype(4, 9, 0);
 //		TWEANN net = cppn.getPhenotype();
-//		String[] level = generateLevelFromCPPN(net, 20, 20, '.', 'w', 
-//				new char[]{'w'}, new char[]{'g','+','A'}, new char[]{'1','2','3'}, 4);
+//		String[] level = generateLevelFromCPPN(net, new double[] {1,1,1,1}, 20, 20, '.', 'w', 
+//				new char[]{'w','b','c'}, new char[]{'l','k','e','A'}, new char[]{'d'}, 15, new char[0]);
 //
 //		Agent agent = new Agent();
 //		agent.setup(null, seed, true); // null = no log, true = human 
 //
-//		runOneGame(toPlay, level, true, agent, seed, playerID);
-		//////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////
-		// Allows for playing a bait level defined by a random CPPN
+//		// Image preview
 //		Game toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
-//		TWEANNGenotype cppn = new TWEANNGenotype(4, 5, 0);
+//		BufferedImage levelImage = getLevelImage(((BasicGame) toPlay), level, agent, 200, 200, seed);
+//		DrawingPanel panel = GraphicsUtil.drawImage(levelImage, "Level Preview", 200, 200); 
+//		
+//		// Reinitialize to clean up mess from image preview
+//		toPlay = new VGDLParser().parseGame(game_file);
+//		GameBundle bundle = new GameBundle(toPlay, level, agent, seed, playerID);
+//		runOneGame(bundle, true);
+//		//////////////////////////////////////////////////////	
+//		
+//		panel.dispose();
+//		
+//		//////////////////////////////////////////////////////
+//
+//		//Recreated the LevelBreederTask.Java in its simplest form to narrow down the errors that we receive
+//		
+//		//////////////////////////////////////////////////////
+//		
+//		VGDLFactory.GetInstance().init();
+//		VGDLRegistry.GetInstance().init();
+//
+//		game = "zelda";
+//		gamesPath = "data/gvgai/examples/gridphysics/";
+//		game_file = gamesPath + game + ".txt";
+//		
+//		cppn = new TWEANNGenotype(4, 8 , 0);
+//		net = cppn.getPhenotype();
+//		level = generateLevelFromCPPN(net, new double[] {1,1,1,1}, 20, 20, '.', 'w', 
+//				new char[]{'w'}, new char[]{'g','+','A'}, new char[]{'1','2','3'}, 15, new char[0]);
+//
+//		agent = new Agent();
+//		agent.setup(null, seed, true); // null = no log, true = human 
+//
+//		// Image preview
+//		toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
+//		levelImage = getLevelImage(((BasicGame) toPlay), level, agent, 200, 200, seed);
+//		panel = GraphicsUtil.drawImage(levelImage, "Level Preview", 200, 200); 
+//		
+//		// Reinitialize to clean up mess from image preview
+//		toPlay = new VGDLParser().parseGame(game_file);
+//		bundle = new GameBundle(toPlay, level, agent, seed, playerID);
+//		runOneGame(bundle, true);
+//		
+//		//////////////////////////////////////////////////////
+//		
+//		panel.dispose();
+//	}
+	
+//	public static void troubleshooting1() {
+//		Parameters.initializeParameterCollections(new String[] {});
+//		//MMNEAT.loadClasses();
+//		
+//		VGDLFactory.GetInstance().init();
+//		VGDLRegistry.GetInstance().init();
+//
+//		String game = "blacksmoke"; // "zelda";
+//		String gamesPath = "data/gvgai/examples/gridphysics/";
+//		String game_file = gamesPath + game + ".txt";
+//		int playerID = 0;
+//		int seed = 0;
+//	
+//		////////////////////////////////////////////////////////
+//		// Allows for playing of any of the existing Zelda levels
+////		int levelNum = 2;
+////		String level_file = gamesPath + game + "_lvl" + levelNum + ".txt";
+////		
+////		Game toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
+////		String[] level = new IO().readFile(level_file);
+////
+////		Agent agent = new Agent();
+////		agent.setup(null, seed, true); // null = no log, true = human 
+////
+////		runOneGame(toPlay, level, true, agent, seed, playerID);
+//		//////////////////////////////////////////////////////
+//		
+//		////////////////////////////////////////////////////////
+//		// Allows for playing a Zelda level defined as a String array
+////		Game toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
+////		String[] level = new String[] {
+////			"wwwwwwwwwwwwwwwwwwwww", 
+////			"w..3.ww............Aw", 
+////			"w....w......wwwwwwwww", 
+////			"w.w.....wwwwwwwwwwwww", 
+////			"w.w........1.......1w", 
+////			"w.wwwwwwwwwwwwwwwww.w", 
+////			"w.......w...wwwwwww.w", 
+////			"w...2w....wgww+....3w", 
+////			"wwwwwwwwwwwwwwwwwwwww"	
+////		};
+//		
+////		String[] level = new String[] {
+////				"wwwwwwwwwwwwwwwwwwwwww", 
+////				"w...............3wwwww", 
+////				"wA.......g......3wwwww", 
+////				"w................1wwww", 
+////				"w................12www", 
+////				"w................33www", 
+////				"w................212ww", 
+////				"w...................ww", 
+////				"w...................ww", 
+////				"w...........+.......ww", 
+////				"w...................ww", 
+////				"w..................www", 
+////				"w..................www", 
+////				"w.................wwww", 
+////				"w................wwwww", 
+////				"w...............wwwwww", 
+////				"w..............wwwwwww", 
+////				"ww...........wwwwwwwww", 
+////				"wwww.......wwwwwwwwwww", 
+////				"wwwwwwwwwwwwwwwwwwwwww", 
+////				"wwwwwwwwwwwwwwwwwwwwww", 
+////				"wwwwwwwwwwwwwwwwwwwwww"	
+////			};
+////
+////		Agent agent = new Agent();
+////		agent.setup(null, seed, true); // null = no log, true = human 
+////
+////		runOneGame(toPlay, level, true, agent, seed, playerID);
+//		//////////////////////////////////////////////////////
+//		
+//		////////////////////////////////////////////////////////
+//		// Allows for playing a Zelda level defined by a random CPPN
+////		Game toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
+////		TWEANNGenotype cppn = new TWEANNGenotype(4, 5, 0);
+////		TWEANN net = cppn.getPhenotype();
+////		String[] level = generateLevelFromCPPN(net, 20, 20, '.', 'w', 
+////				new char[]{'w'}, new char[]{'g','+','A'}, new char[]{'1','2','3'}, 4);
+////
+////		Agent agent = new Agent();
+////		agent.setup(null, seed, true); // null = no log, true = human 
+////
+////		runOneGame(toPlay, level, true, agent, seed, playerID);
+//		//////////////////////////////////////////////////////
+//		
+//		////////////////////////////////////////////////////////
+//		// Allows for playing a bait level defined by a random CPPN
+////		Game toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
+////		TWEANNGenotype cppn = new TWEANNGenotype(4, 5, 0);
+////		TWEANN net = cppn.getPhenotype();
+////		String[] level = generateLevelFromCPPN(net, 10, 10, '.', 'w', 
+////				new char[]{'w'}, new char[]{'k','g','A'}, new char[]{'0','1'}, 15);
+////
+////		Agent agent = new Agent();
+////		agent.setup(null, seed, true); // null = no log, true = human 
+////
+////		runOneGame(toPlay, level, true, agent, seed, playerID);
+//		//////////////////////////////////////////////////////		
+//		
+//		////////////////////////////////////////////////////////
+//		// Allows for playing a bait level defined by a random CPPN
+//		TWEANNGenotype cppn = new TWEANNGenotype(4, 9, 0);
 //		TWEANN net = cppn.getPhenotype();
-//		String[] level = generateLevelFromCPPN(net, 10, 10, '.', 'w', 
-//				new char[]{'w'}, new char[]{'k','g','A'}, new char[]{'0','1'}, 15);
+//		String[] level = generateLevelFromCPPN(net, new double[] {1,1,1,1}, 20, 20, '.', 'w', 
+//				new char[]{'w','b','c'}, new char[]{'l','k','e','A'}, new char[]{'d'}, 15, new char[0]);
 //
 //		Agent agent = new Agent();
 //		agent.setup(null, seed, true); // null = no log, true = human 
 //
-//		runOneGame(toPlay, level, true, agent, seed, playerID);
-		//////////////////////////////////////////////////////		
-		
-		////////////////////////////////////////////////////////
-		// Allows for playing a bait level defined by a random CPPN
-		TWEANNGenotype cppn = new TWEANNGenotype(4, 9, 0);
-		TWEANN net = cppn.getPhenotype();
-		String[] level = generateLevelFromCPPN(net, new double[] {1,1,1,1}, 20, 20, '.', 'w', 
-				new char[]{'w','b','c'}, new char[]{'l','k','e','A'}, new char[]{'d'}, 15, new char[0]);
-
-		Agent agent = new Agent();
-		agent.setup(null, seed, true); // null = no log, true = human 
-
-		// Image preview
-		Game toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
-		BufferedImage levelImage = getLevelImage(((BasicGame) toPlay), level, agent, 200, 200, seed);
-		DrawingPanel panel = GraphicsUtil.drawImage(levelImage, "Level Preview", 200, 200); 
-		
-		// Reinitialize to clean up mess from image preview
-		toPlay = new VGDLParser().parseGame(game_file);
-		GameBundle bundle = new GameBundle(toPlay, level, agent, seed, playerID);
-		runOneGame(bundle, true);
-		//////////////////////////////////////////////////////	
-		
-		panel.dispose();
-	}
+//		// Image preview
+//		Game toPlay = new VGDLParser().parseGame(game_file); // Initialize the game
+//		BufferedImage levelImage = getLevelImage(((BasicGame) toPlay), level, agent, 200, 200, seed);
+//		DrawingPanel panel = GraphicsUtil.drawImage(levelImage, "Level Preview", 200, 200); 
+//		
+//		// Reinitialize to clean up mess from image preview
+//		toPlay = new VGDLParser().parseGame(game_file);
+//		GameBundle bundle = new GameBundle(toPlay, level, agent, seed, playerID);
+//		runOneGame(bundle, true);
+//		//////////////////////////////////////////////////////	
+//		
+//		panel.dispose();
+//	}
 
 
 }

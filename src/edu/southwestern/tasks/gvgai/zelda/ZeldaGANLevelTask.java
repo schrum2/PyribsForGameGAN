@@ -20,10 +20,10 @@ public class ZeldaGANLevelTask extends ZeldaLevelTask<ArrayList<Double>>{
 		return ZeldaGANUtil.generateOneRoomListRepresentationFromGAN(room);
 	}
 	
-	@Override
-	public GameBundle getBundleFromGenotype(Genotype<ArrayList<Double>> individual) {
-		return ZeldaGANLevelBreederTask.setUpGameWithLevelFromLatentVector(individual.getPhenotype());
-	}
+//	@Override
+//	public GameBundle getBundleFromGenotype(Genotype<ArrayList<Double>> individual) {
+//		return ZeldaGANLevelBreederTask.setUpGameWithLevelFromLatentVector(individual.getPhenotype());
+//	}
 	
 	/**
 	 * For quick testing

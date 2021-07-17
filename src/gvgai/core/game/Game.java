@@ -912,11 +912,11 @@ public abstract class Game {
 
 		// Determine the delay for playing with a good fps.
 		double delay = CompetitionParameters.LONG_DELAY;
-		for (Player player : players)
-			if (player instanceof gvgai.tracks.singlePlayer.tools.human.Agent) {
-				delay = 1000.0 / CompetitionParameters.DELAY; // in milliseconds
-				break;
-			}
+//		for (Player player : players)
+//			if (player instanceof gvgai.tracks.singlePlayer.tools.human.Agent) {
+//				delay = 1000.0 / CompetitionParameters.DELAY; // in milliseconds
+//				break;
+//			}
 
 		boolean firstRun = true;
 

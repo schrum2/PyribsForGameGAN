@@ -8,7 +8,7 @@ import edu.southwestern.parameters.CommonConstants;
 import edu.southwestern.parameters.Parameters;
 import edu.southwestern.scores.MultiObjectiveScore;
 import edu.southwestern.scores.Score;
-import edu.southwestern.tasks.mspacman.agentcontroller.pacman.NNCheckEachDirectionPacManController;
+//import edu.southwestern.tasks.mspacman.agentcontroller.pacman.NNCheckEachDirectionPacManController;
 import edu.southwestern.util.ClassCreation;
 import edu.southwestern.util.datastructures.ArrayUtil;
 import edu.southwestern.util.datastructures.Pair;
@@ -152,57 +152,57 @@ public abstract class NoisyLonerTask<T> extends LonerTask<T> {
 		if (MMNEAT.evalReport != null) {
 			MMNEAT.evalReport.log(scoreSummary(objectiveScores, otherScores, fitness, other));
 			// save information about various pacman variables/values in the eval report
-			if (NNCheckEachDirectionPacManController.totalChosenDirectionModeUsageCounts != null) {
-				MMNEAT.evalReport.log("Usage: "
-						+ Arrays.toString(StatisticsUtilities
-								.distribution(NNCheckEachDirectionPacManController.totalChosenDirectionModeUsageCounts))
-						+ Arrays.toString(StatisticsUtilities.distribution(
-								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionModeUsageCounts))
-						+ Arrays.toString(StatisticsUtilities.distribution(
-								NNCheckEachDirectionPacManController.totalChosenDirectionEdibleModeUsageCounts))
-						+ Arrays.toString(StatisticsUtilities.distribution(
-								NNCheckEachDirectionPacManController.totalChosenDirectionThreatModeUsageCounts))
-						+ Arrays.toString(StatisticsUtilities.distribution(
-								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionEdibleModeUsageCounts))
-						+ Arrays.toString(StatisticsUtilities.distribution(
-								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionThreatModeUsageCounts)));
-				MMNEAT.evalReport.log("Total Mode Usage Across Evals");
-				MMNEAT.evalReport.log("\tMode Usage For Chosen Direction Networks: "
-						+ Arrays.toString(NNCheckEachDirectionPacManController.totalChosenDirectionModeUsageCounts)
-						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
-								NNCheckEachDirectionPacManController.totalChosenDirectionModeUsageCounts)));
-				NNCheckEachDirectionPacManController.totalChosenDirectionModeUsageCounts = null;
-				MMNEAT.evalReport.log("\tMode Usage At Junctions For Chosen Direction Networks: "
-						+ Arrays.toString(
-								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionModeUsageCounts)
-						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
-								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionModeUsageCounts)));
-				NNCheckEachDirectionPacManController.totalChosenDirectionJunctionModeUsageCounts = null;
-				MMNEAT.evalReport.log("\tEdible Mode Usage For Chosen Direction Networks: "
-						+ Arrays.toString(
-								NNCheckEachDirectionPacManController.totalChosenDirectionEdibleModeUsageCounts)
-						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
-								NNCheckEachDirectionPacManController.totalChosenDirectionEdibleModeUsageCounts)));
-				NNCheckEachDirectionPacManController.totalChosenDirectionEdibleModeUsageCounts = null;
-				MMNEAT.evalReport.log("\tThreat Mode Usage For Chosen Direction Networks: "
-						+ Arrays.toString(
-								NNCheckEachDirectionPacManController.totalChosenDirectionThreatModeUsageCounts)
-						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
-								NNCheckEachDirectionPacManController.totalChosenDirectionThreatModeUsageCounts)));
-				NNCheckEachDirectionPacManController.totalChosenDirectionThreatModeUsageCounts = null;
-				MMNEAT.evalReport.log("\tEdible Mode Usage At Junctions For Chosen Direction Networks: "
-						+ Arrays.toString(
-								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionEdibleModeUsageCounts)
-						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
-								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionEdibleModeUsageCounts)));
-				NNCheckEachDirectionPacManController.totalChosenDirectionJunctionEdibleModeUsageCounts = null;
-				MMNEAT.evalReport.log("\tThreat Mode Usage At Junctions For Chosen Direction Networks: "
-						+ Arrays.toString(
-								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionThreatModeUsageCounts)
-						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
-								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionThreatModeUsageCounts)));
-				NNCheckEachDirectionPacManController.totalChosenDirectionJunctionThreatModeUsageCounts = null;
-			}
+//			if (NNCheckEachDirectionPacManController.totalChosenDirectionModeUsageCounts != null) {
+//				MMNEAT.evalReport.log("Usage: "
+//						+ Arrays.toString(StatisticsUtilities
+//								.distribution(NNCheckEachDirectionPacManController.totalChosenDirectionModeUsageCounts))
+//						+ Arrays.toString(StatisticsUtilities.distribution(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionModeUsageCounts))
+//						+ Arrays.toString(StatisticsUtilities.distribution(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionEdibleModeUsageCounts))
+//						+ Arrays.toString(StatisticsUtilities.distribution(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionThreatModeUsageCounts))
+//						+ Arrays.toString(StatisticsUtilities.distribution(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionEdibleModeUsageCounts))
+//						+ Arrays.toString(StatisticsUtilities.distribution(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionThreatModeUsageCounts)));
+//				MMNEAT.evalReport.log("Total Mode Usage Across Evals");
+//				MMNEAT.evalReport.log("\tMode Usage For Chosen Direction Networks: "
+//						+ Arrays.toString(NNCheckEachDirectionPacManController.totalChosenDirectionModeUsageCounts)
+//						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionModeUsageCounts)));
+//				NNCheckEachDirectionPacManController.totalChosenDirectionModeUsageCounts = null;
+//				MMNEAT.evalReport.log("\tMode Usage At Junctions For Chosen Direction Networks: "
+//						+ Arrays.toString(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionModeUsageCounts)
+//						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionModeUsageCounts)));
+//				NNCheckEachDirectionPacManController.totalChosenDirectionJunctionModeUsageCounts = null;
+//				MMNEAT.evalReport.log("\tEdible Mode Usage For Chosen Direction Networks: "
+//						+ Arrays.toString(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionEdibleModeUsageCounts)
+//						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionEdibleModeUsageCounts)));
+//				NNCheckEachDirectionPacManController.totalChosenDirectionEdibleModeUsageCounts = null;
+//				MMNEAT.evalReport.log("\tThreat Mode Usage For Chosen Direction Networks: "
+//						+ Arrays.toString(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionThreatModeUsageCounts)
+//						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionThreatModeUsageCounts)));
+//				NNCheckEachDirectionPacManController.totalChosenDirectionThreatModeUsageCounts = null;
+//				MMNEAT.evalReport.log("\tEdible Mode Usage At Junctions For Chosen Direction Networks: "
+//						+ Arrays.toString(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionEdibleModeUsageCounts)
+//						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionEdibleModeUsageCounts)));
+//				NNCheckEachDirectionPacManController.totalChosenDirectionJunctionEdibleModeUsageCounts = null;
+//				MMNEAT.evalReport.log("\tThreat Mode Usage At Junctions For Chosen Direction Networks: "
+//						+ Arrays.toString(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionThreatModeUsageCounts)
+//						+ ":" + Arrays.toString(StatisticsUtilities.distribution(
+//								NNCheckEachDirectionPacManController.totalChosenDirectionJunctionThreatModeUsageCounts)));
+//				NNCheckEachDirectionPacManController.totalChosenDirectionJunctionThreatModeUsageCounts = null;
+//			}
 		}
 		cleanup();
 		// creates the score based off of the multiple objective score

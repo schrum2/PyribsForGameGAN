@@ -7,7 +7,7 @@ import edu.southwestern.evolution.EvolutionaryHistory;
 import edu.southwestern.evolution.SinglePopulationGenerationalEA;
 import edu.southwestern.evolution.genotypes.Genotype;
 import edu.southwestern.evolution.genotypes.TWEANNGenotype;
-import edu.southwestern.evolution.lineage.Offspring;
+//import edu.southwestern.evolution.lineage.Offspring;
 import edu.southwestern.log.FitnessLog;
 import edu.southwestern.parameters.CommonConstants;
 import edu.southwestern.parameters.Parameters;
@@ -37,7 +37,7 @@ public class SelectiveBreedingEA<T> implements SinglePopulationGenerationalEA<T>
 
 	protected FitnessLog<T> keeperLog;
 	
-	public static ArrayList<Offspring> offspring;
+//	public static ArrayList<Offspring> offspring;
 	/**
 	 * default Constructor
 	 */
@@ -124,7 +124,7 @@ public class SelectiveBreedingEA<T> implements SinglePopulationGenerationalEA<T>
 		ArrayList<Genotype<T>> children = new ArrayList<Genotype<T>>();
 		ArrayList<Score<T>> scores = task.evaluateAll(population);
 
-		offspring = new ArrayList<Offspring>();
+//		offspring = new ArrayList<Offspring>();
 		for(int i = scores.size() - 1; i >= 0 ; i--) {
 			if(scores.get(i).scores[0] < 1.0) {//not sure if able to assume only one score in array
 				scores.remove(i); 
@@ -148,20 +148,20 @@ public class SelectiveBreedingEA<T> implements SinglePopulationGenerationalEA<T>
 				children.add(offspring1);
 				i++;
 				EvolutionaryHistory.logLineageData(parentId1,parentId2,offspring1);
-				offspring.add(new Offspring(offspring1.getId(), parentId1, parentId2, generation));
+//				offspring.add(new Offspring(offspring1.getId(), parentId1, parentId2, generation));
 			}
 			if(i < size) {
 				for(int z = InteractiveEvolutionTask.MPG_DEFAULT; z < MUTATION_RATE; z++) {
 					g1.mutate();
 				}
 				children.add(g1);
-				if (parentId2 == -1) {
-					EvolutionaryHistory.logLineageData(parentId1,g1);
-					offspring.add(new Offspring(g1.getId(), parentId1, generation));
-				} else {
-					EvolutionaryHistory.logLineageData(parentId1,parentId2,g1);
-					offspring.add(new Offspring(g1.getId(), parentId1, parentId2, generation));
-				}
+//				if (parentId2 == -1) {
+//					EvolutionaryHistory.logLineageData(parentId1,g1);
+//					offspring.add(new Offspring(g1.getId(), parentId1, generation));
+//				} else {
+//					EvolutionaryHistory.logLineageData(parentId1,parentId2,g1);
+//					offspring.add(new Offspring(g1.getId(), parentId1, parentId2, generation));
+//				}
 			}
 		}
 		logInfo(scores);

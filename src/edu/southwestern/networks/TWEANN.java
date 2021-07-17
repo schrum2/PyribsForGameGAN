@@ -11,13 +11,13 @@ import java.util.List;
 
 import edu.southwestern.MMNEAT.MMNEAT;
 import edu.southwestern.evolution.EvolutionaryHistory;
-import edu.southwestern.evolution.genotypes.HyperNEATCPPNGenotype;
+//import edu.southwestern.evolution.genotypes.HyperNEATCPPNGenotype;
 import edu.southwestern.evolution.genotypes.TWEANNGenotype;
 import edu.southwestern.evolution.genotypes.TWEANNGenotype.LinkGene;
 import edu.southwestern.evolution.genotypes.TWEANNGenotype.NormalizedMemoryNodeGene;
-import edu.southwestern.evolution.lineage.Offspring;
-import edu.southwestern.networks.hyperneat.HyperNEATVisualizationUtil;
-import edu.southwestern.networks.hyperneat.Substrate;
+//import edu.southwestern.evolution.lineage.Offspring;
+//import edu.southwestern.networks.hyperneat.HyperNEATVisualizationUtil;
+//import edu.southwestern.networks.hyperneat.Substrate;
 import edu.southwestern.parameters.CommonConstants;
 import edu.southwestern.parameters.Parameters;
 import edu.southwestern.util.CombinatoricUtilities;
@@ -722,9 +722,9 @@ public class TWEANN implements Network {
 		}
 
 		if (canDraw) {
-			if(!HyperNEATCPPNGenotype.constructingNetwork && CommonConstants.hyperNEAT && CommonConstants.monitorSubstrates) {
-				animateSubstrate();
-			}
+//			if(!HyperNEATCPPNGenotype.constructingNetwork && CommonConstants.hyperNEAT && CommonConstants.monitorSubstrates) {
+//				animateSubstrate();
+//			}
 			if (panel != null && Parameters.parameters.booleanParameter("animateNetwork")) {
 				draw(panel);
 			}
@@ -819,22 +819,22 @@ public class TWEANN implements Network {
 	}
 
 	// Only used within substrate networks to visualize substrate activations
-	private List<Substrate> substrateInformation = null;
-	public void passSubstrateInformation(List<Substrate> substrateInformation) {
-		this.substrateInformation = substrateInformation;
-	}
+//	private List<Substrate> substrateInformation = null;
+//	public void passSubstrateInformation(List<Substrate> substrateInformation) {
+//		this.substrateInformation = substrateInformation;
+//	}
 	
 	/**
 	 * Creates and updates visuals of substrates used by h-neat tetris task 
 	 */
-	public void animateSubstrate() {
-//			for(Substrate s : substrateInformation) { 
-//				System.out.println(s);
-//			}
-			HyperNEATVisualizationUtil.drawSubstrates(nodes, substrateInformation);
-			//tweannGenotype has getLinkBetween
-			//just need to find a way to get neuron innovation numbers
-	}
+//	public void animateSubstrate() {
+////			for(Substrate s : substrateInformation) { 
+////				System.out.println(s);
+////			}
+//			HyperNEATVisualizationUtil.drawSubstrates(nodes, substrateInformation);
+//			//tweannGenotype has getLinkBetween
+//			//just need to find a way to get neuron innovation numbers
+//	}
 
 	private static void refreshActivation(DrawingPanel inputPanel, double[] inputs, double[] outputs, double[] preferences, boolean multitask, double[] preferenceFatigue) {
 		NetworkTask task = (NetworkTask) MMNEAT.task;
@@ -843,11 +843,11 @@ public class TWEANN implements Network {
 
 		Graphics2D g = inputPanel.getGraphics();
 		g.setColor(Color.white);
-		g.fillRect(0, (int) (Offspring.inputOffset * Plot.OFFSET) - (Plot.OFFSET / 2), inputPanel.getFrame().getWidth(), ((inputs.length + outputs.length + preferences.length + 2 + 3) / 2) * Plot.OFFSET);
+		g.fillRect(0, (int) (1 * Plot.OFFSET) - (Plot.OFFSET / 2), inputPanel.getFrame().getWidth(), ((inputs.length + outputs.length + preferences.length + 2 + 3) / 2) * Plot.OFFSET);
 		g.setFont(g.getFont().deriveFont(1));
 		int i;
 		for (i = 0; i < inputs.length; i++) {
-			int y = (int) ((Offspring.inputOffset + (i * 0.5)) * Plot.OFFSET);
+			int y = (int) ((1 + (i * 0.5)) * Plot.OFFSET);
 			int x = inputPanel.getFrame().getWidth() / 2;
 			int w = (int) ((x - Plot.OFFSET) * Math.abs(inputs[i]));
 			if (inputs[i] < 0) {
@@ -863,12 +863,12 @@ public class TWEANN implements Network {
 		}
 
 		g.setColor(Color.ORANGE);
-		g.drawString("OUTPUTS", Plot.OFFSET, (int) ((Offspring.inputOffset + (i * 0.5)) * Plot.OFFSET));
+		g.drawString("OUTPUTS", Plot.OFFSET, (int) ((1 + (i * 0.5)) * Plot.OFFSET));
 		i++;
 
 		labels = task.outputLabels();
 		for (int j = 0; j < outputs.length; j++, i++) {
-			int y = (int) ((Offspring.inputOffset + (i * 0.5)) * Plot.OFFSET);
+			int y = (int) ((1 + (i * 0.5)) * Plot.OFFSET);
 			int x = inputPanel.getFrame().getWidth() / 2;
 			int w = (int) ((x - Plot.OFFSET) * Math.abs(outputs[j]));
 			if (outputs[j] < 0) {
@@ -883,11 +883,11 @@ public class TWEANN implements Network {
 		}
 
 		g.setColor(Color.ORANGE);
-		g.drawString("MODE PREFERENCES", Plot.OFFSET, (int) ((Offspring.inputOffset + (i * 0.5)) * Plot.OFFSET));
+		g.drawString("MODE PREFERENCES", Plot.OFFSET, (int) ((1 + (i * 0.5)) * Plot.OFFSET));
 		i++;
 
 		for (int j = 0; j < preferences.length; j++, i++) {
-			int y = (int) ((Offspring.inputOffset + (i * 0.5)) * Plot.OFFSET);
+			int y = (int) ((1 + (i * 0.5)) * Plot.OFFSET);
 			int x = inputPanel.getFrame().getWidth() / 2;
 			int w = (int) ((x - Plot.OFFSET) * Math.abs(preferences[j]));
 			if (preferences[j] < 0) {
@@ -908,7 +908,7 @@ public class TWEANN implements Network {
 		}
 
 		i++;
-		int y = (int) ((Offspring.inputOffset + (i * 0.5)) * Plot.OFFSET);
+		int y = (int) ((1 + (i * 0.5)) * Plot.OFFSET);
 		g.drawString("Time Stamp: " + MMNEAT.task.getTimeStamp(), Plot.OFFSET, y);
 	}
 

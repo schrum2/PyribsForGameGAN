@@ -40,7 +40,7 @@ import edu.southwestern.util.datastructures.ListUtil;
 import edu.southwestern.util.datastructures.Pair;
 import edu.southwestern.util.search.AStarSearch;
 import edu.southwestern.util.search.Search;
-import icecreamyou.LodeRunner.LodeRunner;
+//import icecreamyou.LodeRunner.LodeRunner;
 
 /**
  * Interactively evolves Lode Runner levels from the latent space of a GAN network.
@@ -256,11 +256,11 @@ public class LodeRunnerGANLevelBreederTask extends InteractiveGANLevelEvolutionT
 		Random rand = new Random(Double.doubleToLongBits(doubleArray[0]));
 		LodeRunnerGANUtil.setSpawn(level, emptySpaces, rand); //sets a consistent and random spawn point 
 		//opens play window to play a level from the LevelBreeder 
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				new LodeRunner(level);
-			}
-		});
+//		SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				new LodeRunner(level);
+//			}
+//		});
 	}
 
 	/**

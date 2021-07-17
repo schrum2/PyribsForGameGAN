@@ -1,11 +1,6 @@
 package edu.southwestern.tasks;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
@@ -16,15 +11,12 @@ import java.util.concurrent.Future;
 
 import edu.southwestern.MMNEAT.MMNEAT;
 import edu.southwestern.evolution.genotypes.Genotype;
-import edu.southwestern.evolution.genotypes.HyperNEATCPPNforDL4JGenotype;
 import edu.southwestern.evolution.genotypes.TWEANNGenotype;
 import edu.southwestern.evolution.metaheuristics.Metaheuristic;
-import edu.southwestern.evolution.mulambda.MuLambda;
 import edu.southwestern.log.EvalLog;
 import edu.southwestern.parameters.CommonConstants;
 import edu.southwestern.parameters.Parameters;
 import edu.southwestern.scores.Score;
-import edu.southwestern.tasks.mspacman.MsPacManTask;
 import edu.southwestern.util.PopulationUtil;
 import edu.southwestern.util.datastructures.Pair;
 import edu.southwestern.util.file.FileUtilities;
@@ -92,18 +84,18 @@ public abstract class LonerTask<T> implements SinglePopulationTask<T> {
 			long after = System.currentTimeMillis();
 			// if there is an evalReport, save it
 			if (MMNEAT.evalReport != null) {
-				if (CommonConstants.recordPacman) {
-					// Copy the eval report
-					CopyOption[] options = new CopyOption[] { StandardCopyOption.REPLACE_EXISTING,
-							StandardCopyOption.COPY_ATTRIBUTES };
-					try {
-						Files.copy(Paths.get(MMNEAT.evalReport.getFilePath()), Paths.get(MsPacManTask.saveFilePrefix
-								+ Parameters.parameters.stringParameter("pacmanSaveFile") + ".eval"), options);
-					} catch (IOException ex) {
-						System.out.println("Could not save eval report");
-						System.exit(1);
-					}
-				}
+//				if (CommonConstants.recordPacman) {
+//					// Copy the eval report
+//					CopyOption[] options = new CopyOption[] { StandardCopyOption.REPLACE_EXISTING,
+//							StandardCopyOption.COPY_ATTRIBUTES };
+//					try {
+//						Files.copy(Paths.get(MMNEAT.evalReport.getFilePath()), Paths.get(MsPacManTask.saveFilePrefix
+//								+ Parameters.parameters.stringParameter("pacmanSaveFile") + ".eval"), options);
+//					} catch (IOException ex) {
+//						System.out.println("Could not save eval report");
+//						System.exit(1);
+//					}
+//				}
 				MMNEAT.evalReport.close();
 			}
 			score.totalEvalTime = (after - before);
@@ -114,7 +106,7 @@ public abstract class LonerTask<T> implements SinglePopulationTask<T> {
 			// print fitness score and genotype information then dispose the
 			// panel, releasing system resources
 			if (panel != null) {
-				TWEANNGenotype genotype = score.individual instanceof HyperNEATCPPNforDL4JGenotype ? ((HyperNEATCPPNforDL4JGenotype) score.individual).getCPPN() : (TWEANNGenotype) score.individual;
+				TWEANNGenotype genotype = (TWEANNGenotype) score.individual;
 				System.out.println("Module Usage: " + Arrays.toString(genotype.getModuleUsage()));
 				System.out.println("Fitness: " + score.toString());
 				panel.dispose();
@@ -200,20 +192,20 @@ public abstract class LonerTask<T> implements SinglePopulationTask<T> {
 		int maxPacManScore = 0;
 		Genotype<T> bestPacMan = null;
 		Score<T> bestScoreSet = null;
-		boolean trackBestPacManScore = CommonConstants.netio && this instanceof MsPacManTask
-				&& MMNEAT.ea instanceof MuLambda && ((MuLambda<T>) MMNEAT.ea).evaluatingParents;
+//		boolean trackBestPacManScore = CommonConstants.netio && this instanceof MsPacManTask
+//				&& MMNEAT.ea instanceof MuLambda && ((MuLambda<T>) MMNEAT.ea).evaluatingParents;
 		for (int i = 0; i < population.size(); i++) {
 			try {
 				Score<T> s = parallel ? futures.get(i).get() : calls.get(i).call();
 				// Specific to Ms Pac-Man
-				if (trackBestPacManScore) {
-					int gameScore = (int) s.otherStats[0]; // Game Score is always first
-					if (gameScore >= maxPacManScore) {
-						bestPacMan = s.individual;
-						maxPacManScore = gameScore;
-						bestScoreSet = s;
-					}
-				}
+//				if (trackBestPacManScore) {
+//					int gameScore = (int) s.otherStats[0]; // Game Score is always first
+//					if (gameScore >= maxPacManScore) {
+//						bestPacMan = s.individual;
+//						maxPacManScore = gameScore;
+//						bestScoreSet = s;
+//					}
+//				}
 				// Best in each objective
 				for (int j = 0; j < bestObjectives.length; j++) {
 					double objectiveScore = s.scores[j];

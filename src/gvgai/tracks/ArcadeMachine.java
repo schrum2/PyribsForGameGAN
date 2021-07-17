@@ -343,9 +343,9 @@ public class ArcadeMachine {
 				}
 
 				// Assign the actions to the players.
-				for (int i = 0; i < no_players; i++) {
-					((gvgai.tracks.multiPlayer.tools.replayer.Agent) players[i]).setActions(act.get(i));
-				}
+//				for (int i = 0; i < no_players; i++) {
+//					((gvgai.tracks.multiPlayer.tools.replayer.Agent) players[i]).setActions(act.get(i));
+//				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

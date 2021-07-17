@@ -1,6 +1,6 @@
 package edu.southwestern.networks.activationfunctions;
 
-import org.nd4j.linalg.activations.Activation;
+//import org.nd4j.linalg.activations.Activation;
 
 public class TriangleWaveFunction extends FullSawtoothFunction {
 	/**
@@ -15,10 +15,10 @@ public class TriangleWaveFunction extends FullSawtoothFunction {
 		return Math.abs(super.f(x));
 	}
 	
-	@Override
-	public Activation equivalentDL4JFunction() {
-		throw new UnsupportedOperationException("No corresponding DL4J function for " + name());
-	}
+//	@Override
+//	public Activation equivalentDL4JFunction() {
+//		throw new UnsupportedOperationException("No corresponding DL4J function for " + name());
+//	}
 	
 	@Override
 	public String name() {

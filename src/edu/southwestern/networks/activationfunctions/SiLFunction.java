@@ -1,5 +1,5 @@
 package edu.southwestern.networks.activationfunctions;
-import org.nd4j.linalg.activations.Activation;
+//import org.nd4j.linalg.activations.Activation;
 
 import edu.southwestern.networks.ActivationFunctions;
 
@@ -14,10 +14,10 @@ public class SiLFunction implements ActivationFunction {
 		return x * ActivationFunctions.sigmoid(x);
 	}
 
-	@Override
-	public Activation equivalentDL4JFunction() {
-		throw new UnsupportedOperationException("No corresponding DL4J function for " + name());
-	}
+//	@Override
+//	public Activation equivalentDL4JFunction() {
+//		throw new UnsupportedOperationException("No corresponding DL4J function for " + name());
+//	}
 
 	@Override
 	public String name() {

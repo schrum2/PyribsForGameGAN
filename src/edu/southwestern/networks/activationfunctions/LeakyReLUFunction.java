@@ -1,6 +1,6 @@
 package edu.southwestern.networks.activationfunctions;
 
-import org.nd4j.linalg.activations.Activation;
+//import org.nd4j.linalg.activations.Activation;
 
 public class LeakyReLUFunction implements ActivationFunction {
 	/**
@@ -13,11 +13,11 @@ public class LeakyReLUFunction implements ActivationFunction {
 		return (sum > 0) ? sum : 0.01 * sum;
 	}
 
-	@Override
-	public Activation equivalentDL4JFunction() {
-		// The alpha of 0.01 is the default used in DL4J
-		return Activation.LEAKYRELU;
-	}
+//	@Override
+//	public Activation equivalentDL4JFunction() {
+//		// The alpha of 0.01 is the default used in DL4J
+//		return Activation.LEAKYRELU;
+//	}
 
 	@Override
 	public String name() {

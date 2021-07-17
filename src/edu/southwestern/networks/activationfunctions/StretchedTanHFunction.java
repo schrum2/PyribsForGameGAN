@@ -1,6 +1,6 @@
 package edu.southwestern.networks.activationfunctions;
 
-import org.nd4j.linalg.activations.Activation;
+//import org.nd4j.linalg.activations.Activation;
 
 public class StretchedTanHFunction implements ActivationFunction {
 	/**
@@ -18,10 +18,10 @@ public class StretchedTanHFunction implements ActivationFunction {
 		return 1.7159 * Math.tanh( (2.0/3) * sum);  
 	}
 	
-	@Override
-	public Activation equivalentDL4JFunction() {
-		throw new UnsupportedOperationException("No corresponding DL4J function for " + name());
-	}
+//	@Override
+//	public Activation equivalentDL4JFunction() {
+//		throw new UnsupportedOperationException("No corresponding DL4J function for " + name());
+//	}
 
 	@Override
 	public String name() {

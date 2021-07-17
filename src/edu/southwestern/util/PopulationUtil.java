@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,19 +18,16 @@ import edu.southwestern.evolution.genotypes.BoundedRealValuedGenotype;
 import edu.southwestern.evolution.genotypes.CPPNOrDirectToGANGenotype;
 import edu.southwestern.evolution.genotypes.CombinedGenotype;
 import edu.southwestern.evolution.genotypes.Genotype;
-import edu.southwestern.evolution.genotypes.HyperNEATCPPNAndSubstrateArchitectureGenotype;
-import edu.southwestern.evolution.genotypes.HyperNEATCPPNGenotype;
-import edu.southwestern.evolution.genotypes.HyperNEATCPPNforDL4JGenotype;
+//import edu.southwestern.evolution.genotypes.HyperNEATCPPNAndSubstrateArchitectureGenotype;
+//import edu.southwestern.evolution.genotypes.HyperNEATCPPNGenotype;
+//import edu.southwestern.evolution.genotypes.HyperNEATCPPNforDL4JGenotype;
 import edu.southwestern.evolution.genotypes.TWEANNGenotype;
 import edu.southwestern.evolution.genotypes.TWEANNPlusParametersGenotype;
-import edu.southwestern.evolution.lineage.Offspring;
+//import edu.southwestern.evolution.lineage.Offspring;
 import edu.southwestern.evolution.mutation.tweann.ActivationFunctionRandomReplacement;
 import edu.southwestern.evolution.mutation.tweann.CauchyDeltaCodeMutation;
 import edu.southwestern.evolution.mutation.tweann.WeightRandomReplacement;
-import edu.southwestern.evolution.nsga2.NSGA2;
-import edu.southwestern.evolution.nsga2.NSGA2Score;
 import edu.southwestern.networks.TWEANN;
-import edu.southwestern.networks.hyperneat.HyperNEATTask;
 import edu.southwestern.parameters.CommonConstants;
 import edu.southwestern.parameters.Parameters;
 import edu.southwestern.scores.Better;
@@ -60,15 +54,15 @@ public class PopulationUtil {
 	 * @return generation # generations logged in file
 	 * @throws FileNotFoundException No lineage file found
 	 */
-	public static int loadLineage() throws FileNotFoundException {
-		String base = Parameters.parameters.stringParameter("base");
-		String log =  Parameters.parameters.stringParameter("log");
-		int runNumber = Parameters.parameters.integerParameter("runNumber");
-		String saveTo = Parameters.parameters.stringParameter("saveTo");
-		//String loadFrom = Parameters.parameters.stringParameter("loadFrom");
-		String originalPrefix = base + "/" + saveTo + runNumber + "/" + log + runNumber + "_";
-		return loadLineage(originalPrefix + "Lineage_log.txt");
-	}
+//	public static int loadLineage() throws FileNotFoundException {
+//		String base = Parameters.parameters.stringParameter("base");
+//		String log =  Parameters.parameters.stringParameter("log");
+//		int runNumber = Parameters.parameters.integerParameter("runNumber");
+//		String saveTo = Parameters.parameters.stringParameter("saveTo");
+//		//String loadFrom = Parameters.parameters.stringParameter("loadFrom");
+//		String originalPrefix = base + "/" + saveTo + runNumber + "/" + log + runNumber + "_";
+//		return loadLineage(originalPrefix + "Lineage_log.txt");
+//	}
 
 	/**
 	 * Load offspring's lineage
@@ -77,85 +71,85 @@ public class PopulationUtil {
 	 * @return generation # generations logged in file
 	 * @throws FileNotFoundException if lineage file cannot be found 
 	 */
-	public static int loadLineage(String filename) throws FileNotFoundException {
-		System.out.println("Load lineage from: " + filename);
-		Scanner s = new Scanner(new File(filename));
-		int generation = 0;
-		while (s.hasNextLine()) {
-			String next = s.nextLine();
-			if (next.startsWith("--")) {
-				generation++;
-			} else {
-				Scanner pattern = new Scanner(next);
-				long parentId1 = pattern.nextLong();
-				long parentId2 = -1;
-				String symbol = pattern.next();
-				if (symbol.equals("X")) {
-					parentId2 = pattern.nextLong();
-					symbol = pattern.next();
-				}
-				if (symbol.equals("->")) {
-					long offspringId = pattern.nextLong();
-					Offspring.addOffspring(new Offspring(offspringId, parentId1, parentId2, generation));
-				} else {
-					System.out.println("WTF: " + symbol);
-					System.out.println("Format error");
-					System.exit(1);
-				}
-				pattern.close();
-			}
-		}
-		s.close();
-		return generation;
-	}
+//	public static int loadLineage(String filename) throws FileNotFoundException {
+//		System.out.println("Load lineage from: " + filename);
+//		Scanner s = new Scanner(new File(filename));
+//		int generation = 0;
+//		while (s.hasNextLine()) {
+//			String next = s.nextLine();
+//			if (next.startsWith("--")) {
+//				generation++;
+//			} else {
+//				Scanner pattern = new Scanner(next);
+//				long parentId1 = pattern.nextLong();
+//				long parentId2 = -1;
+//				String symbol = pattern.next();
+//				if (symbol.equals("X")) {
+//					parentId2 = pattern.nextLong();
+//					symbol = pattern.next();
+//				}
+//				if (symbol.equals("->")) {
+//					long offspringId = pattern.nextLong();
+//					Offspring.addOffspring(new Offspring(offspringId, parentId1, parentId2, generation));
+//				} else {
+//					System.out.println("WTF: " + symbol);
+//					System.out.println("Format error");
+//					System.exit(1);
+//				}
+//				pattern.close();
+//			}
+//		}
+//		s.close();
+//		return generation;
+//	}
 
 	// Does this method work? Looks like it was added by Lauren at some point,
 	// perhaps to explore the lineage in Picbreeder.
-	public static long loadID() throws FileNotFoundException { 
-		String base = Parameters.parameters.stringParameter("base");
-		String log =  Parameters.parameters.stringParameter("log");
-		int runNumber = Parameters.parameters.integerParameter("runNumber");//this one is being a butt. Isn't being set in the batch file and so can't be found from parameters
-		String saveTo = Parameters.parameters.stringParameter("saveTo");
-		//String loadFrom = Parameters.parameters.stringParameter("loadFrom");
-		String prefix = base + "/" + saveTo + runNumber + "/" + log + runNumber + "_";
-		String originalPrefix = base + "/" + saveTo + runNumber + "/" + log + runNumber + "_";
-		System.out.println("Prefix: " + prefix);
-		return loadID(originalPrefix + "Lineage_log.txt");
-	}
+//	public static long loadID() throws FileNotFoundException { 
+//		String base = Parameters.parameters.stringParameter("base");
+//		String log =  Parameters.parameters.stringParameter("log");
+//		int runNumber = Parameters.parameters.integerParameter("runNumber");//this one is being a butt. Isn't being set in the batch file and so can't be found from parameters
+//		String saveTo = Parameters.parameters.stringParameter("saveTo");
+//		//String loadFrom = Parameters.parameters.stringParameter("loadFrom");
+//		String prefix = base + "/" + saveTo + runNumber + "/" + log + runNumber + "_";
+//		String originalPrefix = base + "/" + saveTo + runNumber + "/" + log + runNumber + "_";
+//		System.out.println("Prefix: " + prefix);
+//		return loadID(originalPrefix + "Lineage_log.txt");
+//	}
 
 	// Does this method work? Looks like it was added by Lauren at some point,
 	// perhaps to explore the lineage in Picbreeder.
-	public static long loadID(String filename) throws FileNotFoundException {
-		Scanner s = new Scanner(new File(filename));
-		int generation = 0;
-		long offspringId = -1;
-		while (s.hasNextLine()) {
-			String next = s.nextLine();
-			if (next.startsWith("--")) {
-				generation++;
-			} else {
-				Scanner pattern = new Scanner(next);
-				long parentId1 = pattern.nextLong();
-				long parentId2 = -1;
-				String symbol = pattern.next();
-				if (symbol.equals("X")) {
-					parentId2 = pattern.nextLong();
-					symbol = pattern.next();
-				}
-				if (symbol.equals("->")) {
-					offspringId = pattern.nextLong();
-					Offspring.addOffspring(new Offspring(offspringId, parentId1, parentId2, generation));
-				} else {
-					System.out.println("WTF: " + symbol);
-					System.out.println("Format error");
-					System.exit(1);
-				}
-				pattern.close();
-			}
-		}
-		s.close();
-		return offspringId;
-	}
+//	public static long loadID(String filename) throws FileNotFoundException {
+//		Scanner s = new Scanner(new File(filename));
+//		int generation = 0;
+//		long offspringId = -1;
+//		while (s.hasNextLine()) {
+//			String next = s.nextLine();
+//			if (next.startsWith("--")) {
+//				generation++;
+//			} else {
+//				Scanner pattern = new Scanner(next);
+//				long parentId1 = pattern.nextLong();
+//				long parentId2 = -1;
+//				String symbol = pattern.next();
+//				if (symbol.equals("X")) {
+//					parentId2 = pattern.nextLong();
+//					symbol = pattern.next();
+//				}
+//				if (symbol.equals("->")) {
+//					offspringId = pattern.nextLong();
+//					Offspring.addOffspring(new Offspring(offspringId, parentId1, parentId2, generation));
+//				} else {
+//					System.out.println("WTF: " + symbol);
+//					System.out.println("Format error");
+//					System.exit(1);
+//				}
+//				pattern.close();
+//			}
+//		}
+//		s.close();
+//		return offspringId;
+//	}
 
 	/**
 	 * Given the best scoring individuals in each objective from the
@@ -264,11 +258,11 @@ public class PopulationUtil {
 					for (int i = 0; i < size; i++) {
 						afrr.mutate((Genotype<TWEANN>) ((CPPNOrDirectToGANGenotype) parents.get(i)).getCurrentGenotype());
 					}	
-				} else if(parents.get(0) instanceof HyperNEATCPPNforDL4JGenotype) {
-					// Mutate the CPPN within the HyperNEATCPPNforDL4JGenotype
-					for (int i = 0; i < size; i++) {
-						afrr.mutate(((HyperNEATCPPNforDL4JGenotype) parents.get(i)).getCPPN());
-					}	
+//				} else if(parents.get(0) instanceof HyperNEATCPPNforDL4JGenotype) {
+//					// Mutate the CPPN within the HyperNEATCPPNforDL4JGenotype
+//					for (int i = 0; i < size; i++) {
+//						afrr.mutate(((HyperNEATCPPNforDL4JGenotype) parents.get(i)).getCPPN());
+//					}	
 				} else {
 					throw new IllegalArgumentException("Cannot change activation function of genotype that has no network: " + parents.get(0).getClass().getName());
 				}
@@ -286,10 +280,10 @@ public class PopulationUtil {
 	 *            population with scores
 	 * @return new soft restart population
 	 */
-	public static <T> ArrayList<Genotype<T>> getBestAndDeltaCode(ArrayList<Score<T>> populationScores) {
-		ArrayList<Genotype<T>> front = NSGA2.staticSelection(populationScores.size(), NSGA2.staticNSGA2Scores(populationScores));
-		return deltaCodePopulation(populationScores.size(), front);
-	}
+//	public static <T> ArrayList<Genotype<T>> getBestAndDeltaCode(ArrayList<Score<T>> populationScores) {
+//		ArrayList<Genotype<T>> front = NSGA2.staticSelection(populationScores.size(), NSGA2.staticNSGA2Scores(populationScores));
+//		return deltaCodePopulation(populationScores.size(), front);
+//	}
 
 	/**
 	 * Take some example genotypes (e.g. a Pareto front) and create a whole
@@ -391,9 +385,9 @@ public class PopulationUtil {
 	 * @param scores
 	 *            loaded scores corresponding to individuals in population
 	 */
-	public static <T> void pruneDownToParetoFront(ArrayList<Genotype<T>> population, NSGA2Score<T>[] scores) {
-		pruneDownToTopParetoLayers(population, scores, 1);
-	}
+//	public static <T> void pruneDownToParetoFront(ArrayList<Genotype<T>> population, NSGA2Score<T>[] scores) {
+//		pruneDownToTopParetoLayers(population, scores, 1);
+//	}
 
 	/**
 	 * Modifies population so it contains only top Pareto layers
@@ -407,29 +401,29 @@ public class PopulationUtil {
 	 * @param layers
 	 *            How many layers to keep
 	 */
-	public static <T> void pruneDownToTopParetoLayers(ArrayList<Genotype<T>> population, NSGA2Score<T>[] scores, int layers) {
-		ArrayList<ArrayList<NSGA2Score<T>>> fronts = NSGA2.getParetoLayers(scores);		
-		// Reduce population to only contain top Pareto layers
-		Iterator<Genotype<T>> itr = population.iterator();
-		System.out.println("Reducing to top " + layers + " Pareto layers");
-		while (itr.hasNext()) {
-			Genotype<T> g = itr.next();
-			boolean found = false;
-			for (int i = 0; !found && i < layers; i++) {
-				ArrayList<NSGA2Score<T>> front = fronts.get(i);
-				for (NSGA2Score<T> s : front) {
-					if (s.individual.getId() == g.getId()) {
-						found = true;
-						System.out.println(s.individual.getId() + ":" + Arrays.toString(s.scores) + " in layer " + i);
-						break;
-					}
-				}
-			}
-			if (!found) {
-				itr.remove();
-			}
-		}
-	}
+//	public static <T> void pruneDownToTopParetoLayers(ArrayList<Genotype<T>> population, NSGA2Score<T>[] scores, int layers) {
+//		ArrayList<ArrayList<NSGA2Score<T>>> fronts = NSGA2.getParetoLayers(scores);		
+//		// Reduce population to only contain top Pareto layers
+//		Iterator<Genotype<T>> itr = population.iterator();
+//		System.out.println("Reducing to top " + layers + " Pareto layers");
+//		while (itr.hasNext()) {
+//			Genotype<T> g = itr.next();
+//			boolean found = false;
+//			for (int i = 0; !found && i < layers; i++) {
+//				ArrayList<NSGA2Score<T>> front = fronts.get(i);
+//				for (NSGA2Score<T> s : front) {
+//					if (s.individual.getId() == g.getId()) {
+//						found = true;
+//						System.out.println(s.individual.getId() + ":" + Arrays.toString(s.scores) + " in layer " + i);
+//						break;
+//					}
+//				}
+//			}
+//			if (!found) {
+//				itr.remove();
+//			}
+//		}
+//	}
 
 	/**
 	 * Load all genotypes that are xml files in the given directory
@@ -470,7 +464,7 @@ public class PopulationUtil {
 		if (loaded instanceof Genotype) {
 			individual = (Genotype<T>) loaded;
 			System.out.println(", ID = " + individual.getId());
-			assert !(loaded instanceof HyperNEATCPPNAndSubstrateArchitectureGenotype) || ((HyperNEATCPPNAndSubstrateArchitectureGenotype) individual).allSubstrateConnectivity.get(0).sourceSubstrateName != null;
+//			assert !(loaded instanceof HyperNEATCPPNAndSubstrateArchitectureGenotype) || ((HyperNEATCPPNAndSubstrateArchitectureGenotype) individual).allSubstrateConnectivity.get(0).sourceSubstrateName != null;
 		}
 		return individual;
 	}
@@ -489,16 +483,16 @@ public class PopulationUtil {
 	 * @throws FileNotFoundException
 	 *             if score file does not exist
 	 */
-	public static <T> NSGA2Score<T>[] loadScores(int generation) throws FileNotFoundException {
-		String base = Parameters.parameters.stringParameter("base");
-		String saveTo = Parameters.parameters.stringParameter("saveTo");
-		int run = Parameters.parameters.integerParameter("runNumber");
-		String log = Parameters.parameters.stringParameter("log");
-		String filePrefix = base + "/" + saveTo + run + "/" + log + run + "_";
-		String infix = "parents_gen";
-		String filename = filePrefix + infix + generation + ".txt";
-		return loadScores(filename);
-	}
+//	public static <T> NSGA2Score<T>[] loadScores(int generation) throws FileNotFoundException {
+//		String base = Parameters.parameters.stringParameter("base");
+//		String saveTo = Parameters.parameters.stringParameter("saveTo");
+//		int run = Parameters.parameters.integerParameter("runNumber");
+//		String log = Parameters.parameters.stringParameter("log");
+//		String filePrefix = base + "/" + saveTo + run + "/" + log + run + "_";
+//		String infix = "parents_gen";
+//		String filename = filePrefix + infix + generation + ".txt";
+//		return loadScores(filename);
+//	}
 
 	/**
 	 * Same as above, but for coevolution
@@ -511,16 +505,16 @@ public class PopulationUtil {
 	 * @throws FileNotFoundException
 	 */
 	@SuppressWarnings("rawtypes")
-	public static NSGA2Score[] loadSubPopScores(int generation, int pop) throws FileNotFoundException {
-		String base = Parameters.parameters.stringParameter("base");
-		String saveTo = Parameters.parameters.stringParameter("saveTo");
-		int run = Parameters.parameters.integerParameter("runNumber");
-		String log = Parameters.parameters.stringParameter("log");
-		String filePrefix = base + "/" + saveTo + run + "/" + log + run + "_";
-		String infix = "pop" + pop + "parents_gen";
-		String filename = filePrefix + infix + generation + ".txt";
-		return loadScores(filename);
-	}
+//	public static NSGA2Score[] loadSubPopScores(int generation, int pop) throws FileNotFoundException {
+//		String base = Parameters.parameters.stringParameter("base");
+//		String saveTo = Parameters.parameters.stringParameter("saveTo");
+//		int run = Parameters.parameters.integerParameter("runNumber");
+//		String log = Parameters.parameters.stringParameter("log");
+//		String filePrefix = base + "/" + saveTo + run + "/" + log + run + "_";
+//		String infix = "pop" + pop + "parents_gen";
+//		String filename = filePrefix + infix + generation + ".txt";
+//		return loadScores(filename);
+//	}
 
 	/**
 	 * Loads scores from a specific filename and creates score entries with
@@ -534,34 +528,34 @@ public class PopulationUtil {
 	 * @throws FileNotFoundException
 	 *             if filename does not exist
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static <T> NSGA2Score<T>[] loadScores(String filename) throws FileNotFoundException {
-		Scanner s = new Scanner(new File(filename));
-		NSGA2Score<T>[] populationScores = new NSGA2Score[Parameters.parameters.integerParameter("mu")];
-		int i = 0;
-		while (s.hasNextLine()) {
-			Scanner line = new Scanner(s.nextLine());
-			//int withinGen = line.nextInt();
-			long offspringId = line.nextLong();
-			ArrayList<Double> scores = new ArrayList<Double>();
-			while (line.hasNext()) {
-				double x = line.nextDouble();
-				// System.out.print(x + "\t");
-				scores.add(x);
-			}
-			// System.out.println();
-			double[] scoreArray = new double[scores.size()];
-			for (int j = 0; j < scoreArray.length; j++) {
-				scoreArray[j] = scores.get(j);
-			}
-			Genotype<T> anonymous = anonymousIdIndividual(offspringId);
-			populationScores[i++] = new NSGA2Score(anonymous, scoreArray, null, null);
-			assert populationScores[i - 1] != null : "Null Score! " + i;
-			line.close();
-		}
-		s.close();
-		return populationScores;
-	}
+//	@SuppressWarnings({ "unchecked", "rawtypes" })
+//	public static <T> NSGA2Score<T>[] loadScores(String filename) throws FileNotFoundException {
+//		Scanner s = new Scanner(new File(filename));
+//		NSGA2Score<T>[] populationScores = new NSGA2Score[Parameters.parameters.integerParameter("mu")];
+//		int i = 0;
+//		while (s.hasNextLine()) {
+//			Scanner line = new Scanner(s.nextLine());
+//			//int withinGen = line.nextInt();
+//			long offspringId = line.nextLong();
+//			ArrayList<Double> scores = new ArrayList<Double>();
+//			while (line.hasNext()) {
+//				double x = line.nextDouble();
+//				// System.out.print(x + "\t");
+//				scores.add(x);
+//			}
+//			// System.out.println();
+//			double[] scoreArray = new double[scores.size()];
+//			for (int j = 0; j < scoreArray.length; j++) {
+//				scoreArray[j] = scores.get(j);
+//			}
+//			Genotype<T> anonymous = anonymousIdIndividual(offspringId);
+//			populationScores[i++] = new NSGA2Score(anonymous, scoreArray, null, null);
+//			assert populationScores[i - 1] != null : "Null Score! " + i;
+//			line.close();
+//		}
+//		s.close();
+//		return populationScores;
+//	}
 
 	/**
 	 * Used when creating a score instance where only the score matters. Score
@@ -849,14 +843,14 @@ public class PopulationUtil {
 	 *            scores to search, each containing a genotype
 	 * @return the score matching the id
 	 */
-	public static <T> NSGA2Score<T> scoreWithId(long id, NSGA2Score<T>[] staticScores) {
-		for (NSGA2Score<T> s : staticScores) {
-			if (s.individual.getId() == id) {
-				return s;
-			}
-		}
-		return null;
-	}
+//	public static <T> NSGA2Score<T> scoreWithId(long id, NSGA2Score<T>[] staticScores) {
+//		for (NSGA2Score<T> s : staticScores) {
+//			if (s.individual.getId() == id) {
+//				return s;
+//			}
+//		}
+//		return null;
+//	}
 
 	/**
 	 * Converts an ArrayList of Genotype<T> to an array of Genotypes.
@@ -884,16 +878,16 @@ public class PopulationUtil {
 	 * @return array list of substrate genotypes from population ArrayList
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> ArrayList<Genotype<T>> getSubstrateGenotypesFromCPPNs(HyperNEATTask hnt, ArrayList<Genotype<T>> population, int archetypeIndex) {
-		ArrayList<Genotype<T>> substrateGenotypes = new ArrayList<>();
-		for(int i = 0; i < population.size(); i++) {
-			TWEANNGenotype genotype = ((HyperNEATCPPNGenotype) population.get(i)).getSubstrateGenotype(hnt);
-			// Since these networks will evolve now, they need a real archetype index
-			genotype.archetypeIndex = archetypeIndex;
-			substrateGenotypes.add((Genotype<T>) genotype);
-		}
-		return substrateGenotypes;
-	}
+//	public static <T> ArrayList<Genotype<T>> getSubstrateGenotypesFromCPPNs(HyperNEATTask hnt, ArrayList<Genotype<T>> population, int archetypeIndex) {
+//		ArrayList<Genotype<T>> substrateGenotypes = new ArrayList<>();
+//		for(int i = 0; i < population.size(); i++) {
+//			TWEANNGenotype genotype = ((HyperNEATCPPNGenotype) population.get(i)).getSubstrateGenotype(hnt);
+//			// Since these networks will evolve now, they need a real archetype index
+//			genotype.archetypeIndex = archetypeIndex;
+//			substrateGenotypes.add((Genotype<T>) genotype);
+//		}
+//		return substrateGenotypes;
+//	}
 	
 	/**
 	 * Converts a double[][] population into an ArrayList<Genotype<ArrayList<Double>>>

@@ -1,6 +1,6 @@
 package edu.southwestern.networks.activationfunctions;
 
-import org.nd4j.linalg.activations.Activation;
+//import org.nd4j.linalg.activations.Activation;
 
 public class SineFunction implements ActivationFunction {
 	/**
@@ -14,10 +14,10 @@ public class SineFunction implements ActivationFunction {
 		return Math.sin(x);
 	}
 
-	@Override
-	public Activation equivalentDL4JFunction() {
-		throw new UnsupportedOperationException("No corresponding DL4J function for " + name());
-	}
+//	@Override
+//	public Activation equivalentDL4JFunction() {
+//		throw new UnsupportedOperationException("No corresponding DL4J function for " + name());
+//	}
 
 	@Override
 	public String name() {

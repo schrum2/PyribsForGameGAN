@@ -281,6 +281,7 @@ def pyribs_main():
     
     name = f"{algorithm}_{dim}" # Name for output images and data
     
+    outdir = f"results/{outdir}"
     outdir = Path(outdir)
     if not outdir.is_dir():
         outdir.mkdir()

@@ -353,7 +353,14 @@ if __name__ == '__main__':
     global batch_file
     global algorithm
     global run_num
-    ### INITALIZE GAN STUFF
+
+    if len(sys.argv) != 4:
+        print("Usage:")
+        print("python main.py <batch file> <run number> <map_elites | cma_me_imp>")
+        print("Example:")
+        print("python main.py ExternalMario-DecorateNSLeniency.bat 0 cma_me_imp")
+        quit()
+
     batch_file = sys.argv[1] # A batch file that launches evals for a specific domain with specific binning scheme, like ExternalMario-DistinctNSDecorate.bat
     run_num = sys.argv[2]
     algorithm = sys.argv[3] # "map_elites" or "cma_me_imp"
@@ -362,8 +369,18 @@ if __name__ == '__main__':
         print("Use one of", ["map_elites", "cma_me_imp"])
         quit()
 
+    # I was just launching the batch files, but that won't work on non-Windows systems.
+    # So, instead, I load the contents of the batch file (just a single java command) and
+    # execute that instead. However, I have to replace %1 with the run_num (%1 means the 
+    # first command line parameter to a batch file).
+    with open(batch_file) as batch:
+        contents = batch.readlines()[0] # Only one line/command in these batch files
+        contents = contents.replace("%1",run_num)
+        command_list = contents.split()
+
     # Start running JAR
-    jar = Popen([batch_file, run_num], encoding='ascii', stdin=PIPE, stdout=PIPE)
+    # jar = Popen([batch_file, run_num], encoding='ascii', stdin=PIPE, stdout=PIPE)
+    jar = Popen(command_list, encoding='ascii', stdin=PIPE, stdout=PIPE)
     # Seek to end of JAR
     s = ""
     while s != "READY":

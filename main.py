@@ -207,7 +207,7 @@ def save_heatmap(archive, heatmap_path, min_max):
 
 ### MAIN
 
-def pyribs_main():
+def pyribs_main(batch, run, alg): # These parameters are ignored, but are here to prevent error messages from Fire
     global batch_file
     global dim
     

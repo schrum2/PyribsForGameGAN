@@ -6,4 +6,6 @@ Pillow==7.0.0
 opencv-python==4.5.2.52
 natsort
 numexpr==2.7.0
+fire
+alive_progress
 ribs[all]

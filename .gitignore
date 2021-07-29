@@ -23,3 +23,4 @@
 hs_err_pid*
 /bin/
 my_python_path.txt
+*.pyc

@@ -172,6 +172,17 @@ def create_optimizer(algorithm, dim, seed):
 
 # Using the JAR, get the bins and evaluated score from a provided level
 def get_data_from_solution(one_sol):
+    """
+        Send latent vector solution to GAN and return
+        dictionary of relevant behavior characteristics
+        for the generated level.
+
+        Params:
+        one_sol : latent vector
+        Return:
+        Dictionary of behavior characteristics information 
+    """
+
     jar.stdin.write(str(one_sol.tolist())+ "\n") # Send vector to jar
     jar.stdin.flush()
     coords = ""

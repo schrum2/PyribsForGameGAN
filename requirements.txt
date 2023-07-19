@@ -8,4 +8,4 @@ natsort
 numexpr==2.7.0
 fire
 alive_progress
-ribs[all]
+ribs[all]==0.4.0
